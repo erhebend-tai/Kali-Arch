@@ -1,0 +1,55 @@
+# Azure DevOps CD — dev → staging → production with approvals.
+# Trigger: successful CI completion on main.
+
+trigger: none
+
+resources:
+  pipelines:
+    - pipeline: ci
+      source: CleanArch-CI
+      trigger:
+        branches: [main]
+
+stages:
+  - stage: DeployDev
+    displayName: Deploy — Dev
+    jobs:
+      - deployment: DevDeploy
+        environment: dev
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - template: ../templates/deploy-iac.yml
+                  parameters:
+                    environment: dev
+
+  - stage: DeployStaging
+    displayName: Deploy — Staging
+    dependsOn: DeployDev
+    jobs:
+      - deployment: StagingDeploy
+        environment: staging
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - template: ../templates/deploy-iac.yml
+                  parameters:
+                    environment: staging
+
+  - stage: DeployProduction
+    displayName: Deploy — Production
+    dependsOn: DeployStaging
+    jobs:
+      - deployment: ProdDeploy
+        environment: production   # approval gate configured in ADO
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - template: ../templates/deploy-iac.yml
+                  parameters:
+                    environment: production
+                - script: ./build/scripts/smoke-test.sh $(serviceUrl)
+                  displayName: Post-deploy smoke test

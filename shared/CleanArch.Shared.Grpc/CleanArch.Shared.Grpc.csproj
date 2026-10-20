@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" />
+    <PackageReference Include="Grpc.Net.ClientFactory" />
+    <PackageReference Include="Grpc.Tools" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Shared contract protos — message types shared across services.
+         ProtoRoot="." keeps the logical name "Protos/<file>.proto" so
+         service protos can import them via AdditionalImportDirs. -->
+    <Protobuf Include="Protos\common.proto" ProtoRoot="." GrpcServices="Both" />
+    <Protobuf Include="Protos\pagination.proto" ProtoRoot="." GrpcServices="Both" />
+    <Protobuf Include="Protos\identity.proto" ProtoRoot="." GrpcServices="Both" />
+    <Protobuf Include="Protos\ai.proto" ProtoRoot="." GrpcServices="Both" />
+  </ItemGroup>
+
+</Project>

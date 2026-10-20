@@ -1,0 +1,28 @@
+{
+  "stryker-config": {
+    "solution": "../../CleanArch.slnx",
+    "project": "CleanArch.Domain.csproj",
+    "test-projects": [
+      "../CleanArch.Domain.Tests/CleanArch.Domain.Tests.csproj",
+      "../CleanArch.Application.Tests/CleanArch.Application.Tests.csproj"
+    ],
+    "reporters": ["html", "progress", "dashboard"],
+    "mutation-level": "Standard",
+    "thresholds": {
+      "high": 80,
+      "low": 60,
+      "break": 50
+    },
+    "mutate": [
+      "../../src/CleanArch.Domain/**/*.cs",
+      "../../src/CleanArch.Application/**/*.cs",
+      "!**/obj/**",
+      "!**/bin/**"
+    ],
+    "ignore-methods": [
+      "*.ToString",
+      "*.GetHashCode"
+    ],
+    "verbosity": "info"
+  }
+}

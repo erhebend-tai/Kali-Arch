@@ -1,0 +1,14 @@
+- name: Getting Started
+  href: articles/getting-started/toc.yml
+- name: Architecture
+  href: articles/architecture/toc.yml
+- name: Services
+  href: articles/services/toc.yml
+- name: Cloud Providers
+  href: articles/providers/toc.yml
+- name: Tools
+  href: articles/tools/toc.yml
+- name: Deployment
+  href: articles/deployment/toc.yml
+- name: API Reference
+  href: api/toc.yml

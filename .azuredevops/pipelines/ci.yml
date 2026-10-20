@@ -1,0 +1,141 @@
+# Azure DevOps CI — restore → build → test → analyze → pack.
+# Triggered on every PR and push to main.
+
+trigger:
+  branches:
+    include: [main, develop]
+  paths:
+    exclude: [docs/**, '*.md']
+
+pr:
+  branches:
+    include: [main, develop]
+
+variables:
+  - group: platform-common
+  - name: buildConfiguration
+    value: Release
+  - name: dotnetVersion
+    value: 10.0.x
+
+stages:
+  - stage: Build
+    displayName: Build & Test
+    jobs:
+      - job: DotNetBuild
+        pool:
+          vmImage: windows-latest
+        steps:
+          - template: ../templates/setup-dotnet.yml
+
+          - task: DotNetCoreCLI@2
+            displayName: Restore
+            inputs:
+              command: restore
+              projects: '**/*.csproj'
+              feedsToUse: config
+              nugetConfigPath: nuget.config
+
+          - task: DotNetCoreCLI@2
+            displayName: Build
+            inputs:
+              command: build
+              projects: '**/*.csproj'
+              arguments: >-
+                --configuration $(buildConfiguration)
+                --no-restore
+                /p:ContinuousIntegrationBuild=true
+
+          - task: DotNetCoreCLI@2
+            displayName: Unit Tests
+            inputs:
+              command: test
+              projects: 'tests/*Tests/*.csproj'
+              arguments: >-
+                --configuration $(buildConfiguration)
+                --collect:"XPlat Code Coverage"
+              publishTestResults: true
+
+      - job: GoBuild
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+          - task: GoTool@0
+            displayName: Install Go
+            inputs:
+              version: '1.27'
+          - script: |
+              set -e
+              for d in cf-microservices/*/; do
+                (cd "$d" && go vet ./... && go build ./...)
+              done
+            displayName: Go vet + build
+
+      - job: WorkersBuild
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+          - task: NodeTool@0
+            displayName: Install Node
+            inputs:
+              versionSpec: '24.x'
+          - script: |
+              set -e
+              for d in workers/cf-workers/*/; do
+                (cd "$d" && npm ci && npm run build --if-present)
+              done
+            displayName: CF Workers build
+
+      - job: CodeQuality
+        pool:
+          vmImage: windows-latest
+        steps:
+          - template: ../templates/setup-dotnet.yml
+          - task: SonarQubePrepare@7
+            inputs:
+              SonarQube: 'SonarQube'
+              scannerMode: dotnet
+              projectKey: 'cleanarch-platform'
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: build
+              projects: '**/*.csproj'
+              arguments: '--configuration $(buildConfiguration)'
+          - task: SonarQubeAnalyze@7
+          - task: SonarQubePublish@7
+
+  - stage: Package
+    displayName: Pack & Publish Artifacts
+    dependsOn: Build
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    jobs:
+      - job: PackNuGet
+        pool:
+          vmImage: windows-latest
+        steps:
+          - template: ../templates/setup-dotnet.yml
+          - task: DotNetCoreCLI@2
+            displayName: Pack publishable packages
+            inputs:
+              command: pack
+              packagesToPack: 'packages/nuget/**/*.csproj'
+              packDirectory: '$(Build.ArtifactStagingDirectory)/nuget'
+          - task: PublishBuildArtifacts@1
+            inputs:
+              pathToPublish: '$(Build.ArtifactStagingDirectory)/nuget'
+              artifactName: nuget
+
+      - job: PublishContainers
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+          - task: Docker@2
+            displayName: Build & push API image
+            inputs:
+              containerRegistry: '$(containerRegistryConnection)'
+              repository: 'cleanarch/api'
+              command: buildAndPush
+              dockerfile: 'src/CleanArch.API/Dockerfile'
+              tags: |
+                $(Build.BuildNumber)
+                latest

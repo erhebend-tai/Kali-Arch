@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VirtualMachineService.Application\VirtualMachineService.Application.csproj" />
+    <ProjectReference Include="..\VirtualMachineService.Infrastructure\VirtualMachineService.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\..\shared\CleanArch.Shared.Infrastructure\CleanArch.Shared.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,4 @@
+<Project>
+  <!-- DocFx.targets — custom MSBuild target hooks. Import from
+       Directory.Build.props or individual .csproj files. -->
+</Project>

@@ -1,0 +1,47 @@
+name: CI
+on:
+  push:        { branches: [main, develop] }
+  pull_request:{ branches: [main, develop] }
+
+jobs:
+  analyze:          # Roslyn analyzers: dotnet build /p:TreatWarningsAsErrors=true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-dotnet
+      - run: dotnet build CleanArch.slnx -c Release /p:TreatWarningsAsErrors=true
+
+  test-dotnet:      # unit + architecture tests, coverage upload
+    needs: analyze
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-dotnet
+      - run: dotnet test CleanArch.slnx -c Release --filter "Category=Unit" --collect:"XPlat Code Coverage"
+      - run: dotnet test CleanArch.slnx -c Release --filter "Category=Architecture"   # CleanArch.Linting arch tests
+
+  test-go:          # go test ./... for each cf-microservices/*
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with: { go-version: "1.23" }
+      - run: for d in cf-microservices/*/; do (cd "$d" && go test ./...); done
+
+  test-workers:     # npm ci && npm test for each workers/cf-workers/*
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: for d in workers/cf-workers/*/; do (cd "$d" && npm ci && npm test); done
+
+  docker:           # matrix: build + push each service image to ghcr.io
+    needs: [test-dotnet, test-go]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: [VirtualMachineService, IdentityService, AIService, StorageService, GatewayService]
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -f services/${{ matrix.service }}/Dockerfile -t ${{ matrix.service }}:${{ github.sha }} .

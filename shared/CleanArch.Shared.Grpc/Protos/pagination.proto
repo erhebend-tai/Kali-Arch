@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package cleanarch.common;
+option csharp_namespace = "CleanArch.Shared.Grpc.Common";
+
+// Cursor-based pagination — complements the offset paging in
+// common.proto for large or infinite-scroll datasets where
+// OFFSET scans get expensive.
+
+message CursorPageRequest {
+  string cursor    = 1;  // opaque — from a previous CursorPageInfo.next_cursor
+  int32  page_size = 2;
+  string sort_by   = 3;
+  bool   ascending = 4;
+}
+
+message CursorPageInfo {
+  string next_cursor     = 1;
+  string previous_cursor = 2;
+  bool   has_next        = 3;
+  bool   has_previous    = 4;
+}

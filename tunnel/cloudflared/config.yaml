@@ -1,0 +1,25 @@
+# cloudflared tunnel --config config.yaml run
+tunnel: your-tunnel-id
+credentials-file: /etc/cloudflared/credentials/tunnel-credentials.json
+
+ingress:
+  - hostname: api.yourplatform.com
+    service: http://gateway-service:5000
+  - hostname: vm.internal.yourplatform.com
+    service: http://vm-service:5001
+  - hostname: identity.internal.yourplatform.com
+    service: http://identity-service:5002
+  - hostname: ai.internal.yourplatform.com
+    service: http://ai-service:5003
+  - hostname: storage.internal.yourplatform.com
+    service: http://storage-service:5004
+  - hostname: go-vm.internal.yourplatform.com
+    service: http://go-vm-service:8080
+  - hostname: baremetal-api.yourplatform.com
+    service: http://localhost:5000
+    originRequest:
+      connectTimeout: 30s
+      noTLSVerify: false
+  - hostname: grafana.internal.yourplatform.com
+    service: http://grafana:3000
+  - service: http_status:404              # catch-all must be last

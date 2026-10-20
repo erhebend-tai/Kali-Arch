@@ -1,0 +1,7 @@
+name: Run Analyzers
+description: Builds with TreatWarningsAsErrors so Roslyn rules fail CI on violation
+runs:
+  using: composite
+  steps:
+    - run: dotnet build CleanArch.slnx -c Release /p:TreatWarningsAsErrors=true /p:EnforceCodeStyleInBuild=true
+      shell: bash

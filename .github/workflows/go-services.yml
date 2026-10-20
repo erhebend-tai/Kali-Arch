@@ -1,0 +1,15 @@
+name: Go Services
+on:
+  push:
+    branches: [main, develop]
+    paths: ["cf-microservices/**"]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: { service: [vm-service, identity-service, storage-service] }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with: { go-version: "1.23" }
+      - run: cd cf-microservices/${{ matrix.service }} && go test ./... -race

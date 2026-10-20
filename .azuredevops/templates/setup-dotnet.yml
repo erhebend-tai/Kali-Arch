@@ -1,0 +1,13 @@
+steps:
+  - task: UseDotNet@2
+    displayName: Install .NET $(dotnetVersion)
+    inputs:
+      version: $(dotnetVersion)
+      includePreviewVersions: false
+
+  - task: DotNetCoreCLI@2
+    displayName: Restore local tools
+    inputs:
+      command: custom
+      custom: tool
+      arguments: restore

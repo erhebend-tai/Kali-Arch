@@ -1,0 +1,9 @@
+name: Setup Dapr
+description: Installs the Dapr CLI and initializes daprd
+runs:
+  using: composite
+  steps:
+    - run: wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | bash
+      shell: bash
+    - run: dapr init
+      shell: bash

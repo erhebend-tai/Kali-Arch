@@ -1,0 +1,79 @@
+{
+  "info": {
+    "name": "CleanArch Platform API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "REST surface — gRPC/GraphQL/SignalR are separate protocols."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    }
+  ],
+  "item": [
+    {
+      "name": "Compute",
+      "item": [
+        {
+          "name": "List VMs",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/compute/vms",
+            "header": []
+          }
+        },
+        {
+          "name": "Provision VM",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/compute/vms",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"web-01\",\n  \"resourceGroup\": \"prod-rg\",\n  \"region\": \"us-east\",\n  \"osType\": \"Linux\",\n  \"size\": \"medium\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get VM",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/compute/vms/{{vmId}}",
+            "header": []
+          }
+        },
+        {
+          "name": "Start VM",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/compute/vms/{{vmId}}/start",
+            "header": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Liveness",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/healthz/live",
+            "header": []
+          }
+        },
+        {
+          "name": "Readiness",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/healthz/ready",
+            "header": []
+          }
+        }
+      ]
+    }
+  ]
+}

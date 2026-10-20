@@ -1,0 +1,14 @@
+---
+- name: Install and run cloudflared tunnel daemon
+  hosts: baremetal
+  become: true
+  tasks:
+    - name: Install cloudflared
+      ansible.builtin.get_url:
+        url: https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
+        dest: /usr/local/bin/cloudflared
+        mode: "0755"
+    - name: Copy tunnel config
+      ansible.builtin.copy:
+        src: "{{ cloudflared_config }}"
+        dest: /etc/cloudflared/config.yaml

@@ -1,0 +1,11 @@
+# Variable group: platform-common — linked from pipelines.
+variables:
+  - name: cloudProvider
+    value: Azure
+  - name: containerRegistryConnection
+    value: acr-cleanarch
+  - name: serviceUrl
+    value: https://api-dev.yourplatform.dev
+  # Secrets (azureClientId/Secret/etc.) live in the ADO
+  # "platform-secrets" variable group marked secret —
+  # never in YAML.

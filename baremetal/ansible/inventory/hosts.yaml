@@ -1,0 +1,6 @@
+all:
+  children:
+    baremetal:
+      hosts:
+        bm-01:
+          ansible_host: 192.0.2.10

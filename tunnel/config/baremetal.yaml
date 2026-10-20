@@ -1,0 +1,15 @@
+# Run on the bare metal host — exposes local services with no public IP:
+#   cloudflared tunnel --config baremetal.yaml run
+tunnel: your-baremetal-tunnel-id
+credentials-file: /etc/cloudflared/credentials/baremetal-credentials.json
+
+ingress:
+  - hostname: baremetal.yourplatform.com
+    service: http://localhost:5000        # .NET API
+  - hostname: auth.yourplatform.com
+    service: http://localhost:8080        # Keycloak
+  - hostname: rabbitmq.internal.yourplatform.com
+    service: http://localhost:15672       # RabbitMQ management UI
+  - hostname: vault.internal.yourplatform.com
+    service: http://localhost:8200        # HashiCorp Vault
+  - service: http_status:404

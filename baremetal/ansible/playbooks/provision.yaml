@@ -1,0 +1,12 @@
+---
+- name: Provision bare metal server
+  hosts: baremetal
+  become: true
+  roles:
+    - docker
+    - dotnet
+    - rabbitmq
+    - keycloak
+    - vault
+    - nginx
+    - cloudflared

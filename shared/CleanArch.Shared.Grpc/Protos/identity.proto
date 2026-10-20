@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package cleanarch.identity;
+option csharp_namespace = "CleanArch.Shared.Grpc.Identity";
+
+import "google/protobuf/timestamp.proto";
+
+// IdentityService contract — service-to-service user lookups
+// and token validation.
+service IdentityService {
+  rpc GetUser       (GetUserRequest)       returns (GetUserResponse);
+  rpc ValidateToken (ValidateTokenRequest) returns (ValidateTokenResponse);
+}
+
+message GetUserRequest {
+  string user_id   = 1;
+  string tenant_id = 2;
+}
+
+message GetUserResponse {
+  string user_id   = 1;
+  string email     = 2;
+  repeated string roles = 3;
+  string tenant_id = 4;
+  google.protobuf.Timestamp created_at = 5;
+}
+
+message ValidateTokenRequest {
+  string token = 1;
+}
+
+message ValidateTokenResponse {
+  bool   valid   = 1;
+  string user_id = 2;
+  string email   = 3;
+  repeated string roles = 4;
+}

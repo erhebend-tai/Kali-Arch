@@ -1,0 +1,44 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "API",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/src/CleanArch.API/bin/Debug/net10.0/CleanArch.API.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/src/CleanArch.API",
+      "stopAtEntry": false,
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CloudProvider": "Azure"
+      }
+    },
+    {
+      "name": "Workers",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/workers/CleanArch.Workers/bin/Debug/net10.0/CleanArch.Workers.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/workers/CleanArch.Workers",
+      "stopAtEntry": false
+    },
+    {
+      "name": "CLI",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/cli/CleanArch.Cli/bin/Debug/net10.0/cleanarch.dll",
+      "args": ["--help"],
+      "cwd": "${workspaceFolder}/cli/CleanArch.Cli",
+      "stopAtEntry": false
+    },
+    {
+      "name": "Attach to API",
+      "type": "coreclr",
+      "request": "attach"
+    }
+  ]
+}

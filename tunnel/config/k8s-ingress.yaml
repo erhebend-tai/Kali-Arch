@@ -1,0 +1,9 @@
+# In-cluster cloudflared (replaces ingress controller / public LB):
+#   kubectl run cloudflared --image=cloudflare/cloudflared -- tunnel run
+tunnel: your-k8s-tunnel-id
+credentials-file: /etc/cloudflared/credentials/k8s-credentials.json
+
+ingress:
+  - hostname: k8s-api.yourplatform.com
+    service: http://gateway-service.default.svc.cluster.local
+  - service: http_status:404

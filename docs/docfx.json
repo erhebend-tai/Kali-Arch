@@ -1,0 +1,33 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": ["**/*.csproj"],
+          "exclude": ["**/obj/**", "**/bin/**", "**/*.Tests.csproj"],
+          "src": "../src"
+        },
+        {
+          "files": ["**/*.csproj"],
+          "exclude": ["**/obj/**", "**/bin/**", "**/*.Tests.csproj"],
+          "src": "../services"
+        }
+      ],
+      "dest": "api"
+    }
+  ],
+  "build": {
+    "content": [
+      { "files": ["articles/**/*.md", "api/**/*.yml"] },
+      { "files": ["toc.yml", "index.md"] }
+    ],
+    "resource": [{ "files": ["images/**"] }],
+    "dest": "_site",
+    "globalMetadata": {
+      "_appName": "CleanArch",
+      "_appTitle": "CleanArch Documentation",
+      "_enableSearch": true
+    },
+    "template": ["default", "modern", "_template"]
+  }
+}

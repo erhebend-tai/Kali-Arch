@@ -1,0 +1,6 @@
+{
+  "settings": {
+    "documentationRules": { "companyName": "YourPlatform" },
+    "orderingRules":      { "usingDirectivesPlacement": "outsideNamespace" }
+  }
+}

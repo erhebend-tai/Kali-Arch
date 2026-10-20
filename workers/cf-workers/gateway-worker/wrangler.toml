@@ -1,0 +1,15 @@
+name = "gateway-worker"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# Edge gateway: routes traffic to downstream services reachable via
+# Cloudflared tunnel hostnames (see tunnel/cloudflared/config.yaml).
+[vars]
+VM_SERVICE_URL       = "https://vm.internal.yourplatform.com"
+IDENTITY_SERVICE_URL = "https://identity.internal.yourplatform.com"
+STORAGE_SERVICE_URL  = "https://storage.internal.yourplatform.com"
+AI_SERVICE_URL       = "https://ai.internal.yourplatform.com"
+
+# [[kv_namespaces]]
+# binding = "RATE_LIMIT_KV"
+# id = "your-kv-namespace-id"

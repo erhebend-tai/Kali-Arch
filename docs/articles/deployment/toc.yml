@@ -1,0 +1,8 @@
+- name: docker
+  href: docker.md
+- name: kubernetes
+  href: kubernetes.md
+- name: cloudflare workers
+  href: cloudflare-workers.md
+- name: baremetal
+  href: baremetal.md

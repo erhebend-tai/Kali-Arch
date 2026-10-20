@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StorageService.Application\StorageService.Application.csproj" />
+    <ProjectReference Include="..\StorageService.Infrastructure\StorageService.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\..\shared\CleanArch.Shared.Infrastructure\CleanArch.Shared.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

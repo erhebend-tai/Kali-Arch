@@ -1,0 +1,5 @@
+{
+  "editor.formatOnSave": true,
+  "dotnet.defaultSolution": "CleanArch.slnx",
+  "go.toolsManagement.autoUpdate": true
+}

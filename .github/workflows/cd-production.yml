@@ -1,0 +1,62 @@
+name: Deploy to Production
+on:
+  push: { branches: [main] }          # requires PR checks green + approvals
+  workflow_dispatch:
+jobs:
+  create-release:    # git tag v<x.y.z> + gh release with changelog + packages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: softprops/action-gh-release@v2
+        with: { generate_release_notes: true }
+
+  publish-nuget:     # dotnet nuget push artifacts/nuget/*.nupkg
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-dotnet
+      - run: dotnet nuget push 'artifacts/nuget/*.nupkg' -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+
+  publish-npm:       # npm publish for packages/npm/@cleanarch/*
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20", registry-url: "https://registry.npmjs.org" }
+      - run: for d in packages/npm/@cleanarch/*/; do (cd "$d" && npm publish --access public); done
+        env: { NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} }
+
+  publish-docs:      # DocFX -> docs/_site -> GitHub Pages (docs site)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-dotnet
+      - run: |
+          dotnet tool install -g docfx
+          docfx docs/docfx.json
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/_site
+
+  deploy-services:   # blue/green + canary rollout via deploy-service action
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/deploy-service
+        with: { environment: production, image-tag: ${{ github.sha }} }
+
+  deploy-workers-production:   # wrangler deploy --env production
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - run: for d in workers/cf-workers/*/; do (cd "$d" && npm ci && npx wrangler deploy --env production); done
+        env: { CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }} }
+
+  post-deploy:       # prod smoke tests + status page + notify
+    needs: [deploy-services, deploy-workers-production]
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -fsS https://api.yourplatform.com/health

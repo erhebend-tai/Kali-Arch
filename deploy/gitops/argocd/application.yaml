@@ -1,0 +1,30 @@
+# ArgoCD Application — GitOps sync for the platform.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cleanarch-platform
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/yourorg/cleanarch.git
+    targetRevision: main
+    path: deploy/gitops/manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cleanarch
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+    retry:
+      limit: 5
+      backoff:
+        duration: 30s
+        factor: 2
+        maxDuration: 5m

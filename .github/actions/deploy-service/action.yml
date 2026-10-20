@@ -1,0 +1,10 @@
+name: Deploy Service
+description: Deploys a service image to the target environment
+inputs:
+  environment: { required: true }
+  image-tag:   { required: true }
+runs:
+  using: composite
+  steps:
+    - run: echo "deploy ${{ inputs.image-tag }} -> ${{ inputs.environment }} (kubectl/helm here)"
+      shell: bash

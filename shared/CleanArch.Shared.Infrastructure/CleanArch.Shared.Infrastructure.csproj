@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CleanArch.Shared.Domain\CleanArch.Shared.Domain.csproj" />
+    <ProjectReference Include="..\CleanArch.Shared.Contracts\CleanArch.Shared.Contracts.csproj" />
+    <ProjectReference Include="..\CleanArch.Shared.Results\CleanArch.Shared.Results.csproj" />
+  </ItemGroup>
+
+</Project>

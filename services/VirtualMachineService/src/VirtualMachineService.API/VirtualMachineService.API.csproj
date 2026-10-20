@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" />
+    <PackageReference Include="Grpc.AspNetCore.Web" />
+    <PackageReference Include="Grpc.AspNetCore.HealthChecks" />
+    <PackageReference Include="Grpc.AspNetCore.Server.Reflection" />
+    <PackageReference Include="Grpc.Tools" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" />
+    <PackageReference Include="FluentValidation" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- common.proto resolves from the shared Grpc project via
+         AdditionalImportDirs — messages compile there once. -->
+    <Protobuf Include="Grpc\Protos\vm.proto" ProtoRoot="Grpc"
+        GrpcServices="Server"
+        AdditionalImportDirs="..\..\..\..\shared\CleanArch.Shared.Grpc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VirtualMachineService.Application\VirtualMachineService.Application.csproj" />
+    <ProjectReference Include="..\VirtualMachineService.Infrastructure\VirtualMachineService.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\..\shared\CleanArch.Shared.Infrastructure\CleanArch.Shared.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\..\shared\CleanArch.Shared.Grpc\CleanArch.Shared.Grpc.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,11 @@
+# Developer tunnel — share local services through a public hostname:
+#   cloudflared tunnel --config local-dev.yaml run
+tunnel: your-dev-tunnel-id
+credentials-file: ~/.cloudflared/dev-credentials.json
+
+ingress:
+  - hostname: dev-api.yourplatform.com
+    service: http://localhost:5000
+  - hostname: dev-vm.yourplatform.com
+    service: http://localhost:5001
+  - service: http_status:404

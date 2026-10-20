@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package cleanarch.ai;
+option csharp_namespace = "CleanArch.Shared.Grpc.Ai";
+
+// AIService contract — completions and embeddings for
+// service-to-service AI calls.
+service AIService {
+  rpc GenerateCompletion (CompletionRequest) returns (CompletionResponse);
+  rpc StreamCompletion   (CompletionRequest) returns (stream CompletionChunk);
+  rpc Embed              (EmbedRequest)      returns (EmbedResponse);
+}
+
+message CompletionRequest {
+  string prompt      = 1;
+  string model       = 2;
+  int32  max_tokens  = 3;
+  double temperature = 4;
+  string tenant_id   = 5;
+}
+
+message CompletionResponse {
+  string text              = 1;
+  string model             = 2;
+  int32  prompt_tokens     = 3;
+  int32  completion_tokens = 4;
+}
+
+message CompletionChunk {
+  string delta = 1;
+  bool   done  = 2;
+}
+
+message EmbedRequest {
+  string text      = 1;
+  string model     = 2;
+  string tenant_id = 3;
+}
+
+message EmbedResponse {
+  repeated float values = 1;
+}

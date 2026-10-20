@@ -1,0 +1,14 @@
+- name: azure
+  href: azure.md
+- name: aws
+  href: aws.md
+- name: gcp
+  href: gcp.md
+- name: alibaba
+  href: alibaba.md
+- name: oracle
+  href: oracle.md
+- name: cloudflare
+  href: cloudflare.md
+- name: baremetal
+  href: baremetal.md

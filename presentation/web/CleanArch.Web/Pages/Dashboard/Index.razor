@@ -1,0 +1,22 @@
+@page "/"
+@inject IApiClient Api
+
+<PageTitle>Dashboard — CleanArch</PageTitle>
+
+<h1>Dashboard</h1>
+
+@if (_health is null)
+{
+    <p>Checking platform health…</p>
+}
+else
+{
+    <p>API status: <strong>@_health</strong></p>
+}
+
+@code {
+    private string? _health;
+
+    protected override async Task OnInitializedAsync() =>
+        _health = await Api.GetHealthAsync();
+}

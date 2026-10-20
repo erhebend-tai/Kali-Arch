@@ -1,0 +1,70 @@
+name: Deploy to Staging
+on:
+  push: { branches: [develop] }
+jobs:
+  version:           # build/scripts/generate-version.sh -> 1.0.0-ci.<sha>
+    runs-on: ubuntu-latest
+    outputs: { version: ${{ steps.v.outputs.version }} }
+    steps:
+      - uses: actions/checkout@v4
+      - id: v
+        run: echo "version=$(build/scripts/generate-version.sh)" >> "$GITHUB_OUTPUT"
+
+  build-and-pack:    # CAKE Pack-NuGet + npm pack -> artifacts/{nuget,npm}
+    needs: version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-dotnet
+      - run: build/scripts/pack-nuget.sh ${{ needs.version.outputs.version }}
+      - run: build/scripts/pack-npm.sh
+      - uses: actions/upload-artifact@v4
+        with: { name: packages, path: artifacts/ }
+
+  build-docs:        # DocFX: metadata -> api/*.yml, build -> docs/_site (staging)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-dotnet
+      - run: |
+          dotnet tool install -g docfx
+          docfx metadata docs/docfx.json
+          docfx build docs/docfx.json
+      - uses: actions/upload-artifact@v4
+        with: { name: docs-site, path: docs/_site }
+
+  deploy-services:   # .NET services -> k8s staging via deploy-service action
+    needs: version
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/deploy-service
+        with: { environment: staging, image-tag: ${{ github.sha }} }
+
+  deploy-workers:    # wrangler deploy --env staging per workers/cf-workers/*
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+      - run: for d in workers/cf-workers/*/; do (cd "$d" && npm ci && npx wrangler deploy --env staging); done
+        env: { CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }} }
+
+  deploy-worker-services:  # .NET background workers -> k8s staging
+    needs: version
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - run: echo "kubectl apply -f deploy/k8s/staging/workers/"
+
+  deploy-tunnel:     # PUT updated ingress rules to the Cloudflare tunnel API
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - run: echo "Update tunnel config via CF API — see tunnel/cloudflared/config.yaml"
+
+  smoke-tests:       # health checks + E2E against staging, then notify
+    needs: [deploy-services, deploy-workers]
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -fsS https://staging-api.yourplatform.com/health

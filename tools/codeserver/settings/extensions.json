@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "ms-dotnettools.csharp",
+    "ms-dotnettools.csdevkit",
+    "golang.go",
+    "humao.rest-client",
+    "eamodio.gitlens"
+  ]
+}

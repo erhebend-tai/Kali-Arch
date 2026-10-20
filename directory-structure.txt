@@ -1,0 +1,1770 @@
++--- .github
+|   +--- actions
+|   |   +--- deploy-service
+|   |   |   +--- action.yml
+|   |   +--- run-analyzers
+|   |   |   +--- action.yml
+|   |   +--- setup-dapr
+|   |   |   +--- action.yml
+|   |   +--- setup-dotnet
+|   |       +--- action.yml
+|   +--- workflows
+|       +--- cd-production.yml
+|       +--- cd-staging.yml
+|       +--- ci.yml
+|       +--- docs.yml
+|       +--- go-services.yml
+|       +--- pr-checks.yml
+|       +--- release.yml
+|       +--- security-scan.yml
+|       +--- workers-deploy.yml
++--- baremetal
+|   +--- ansible
+|   |   +--- inventory
+|   |   |   +--- group_vars
+|   |   |   |   +--- all.yaml
+|   |   |   |   +--- baremetal.yaml
+|   |   |   +--- hosts.yaml
+|   |   +--- playbooks
+|   |   |   +--- deploy-cloudflared.yaml
+|   |   |   +--- deploy-monitoring.yaml
+|   |   |   +--- deploy-services.yaml
+|   |   |   +--- provision.yaml
+|   |   +--- roles
+|   |       +--- cloudflared
+|   |       |   +--- tasks
+|   |       |       +--- main.yaml
+|   |       +--- docker
+|   |       |   +--- tasks
+|   |       |       +--- main.yaml
+|   |       +--- dotnet
+|   |       |   +--- tasks
+|   |       |       +--- main.yaml
+|   |       +--- keycloak
+|   |       |   +--- tasks
+|   |       |       +--- main.yaml
+|   |       +--- nginx
+|   |       |   +--- tasks
+|   |       |       +--- main.yaml
+|   |       +--- rabbitmq
+|   |       |   +--- tasks
+|   |       |       +--- main.yaml
+|   |       +--- vault
+|   |           +--- tasks
+|   |               +--- main.yaml
+|   +--- os
+|   |   +--- debian-12
+|   |   |   +--- cloud-init.yaml
+|   |   +--- ubuntu-22.04
+|   |       +--- cloud-init.yaml
+|   +--- scripts
+|   |   +--- bootstrap.sh
+|   |   +--- deploy.sh
+|   |   +--- health-check.sh
+|   |   +--- rotate-secrets.sh
+|   +--- terraform
+|       +--- providers
+|       |   +--- equinix.tf
+|       |   +--- hetzner.tf
+|       |   +--- ovh.tf
+|       +--- main.tf
+|       +--- outputs.tf
+|       +--- variables.tf
++--- build
+|   +--- agents
+|   |   +--- docker-compose.agents.yml
+|   |   +--- Dockerfile.agent
+|   |   +--- setup-agent.sh
+|   +--- scripts
+|   |   +--- build.cake
+|   |   +--- build.ps1
+|   |   +--- build.sh
+|   |   +--- generate-version.sh
+|   |   +--- pack-npm.sh
+|   |   +--- pack-nuget.sh
+|   +--- targets
+|       +--- Analyzers.targets
+|       +--- CodeGen.targets
+|       +--- DocFx.targets
+|       +--- Pack.targets
++--- cf-microservices
+|   +--- identity-service
+|   |   +--- cmd
+|   |   |   +--- .gitkeep
+|   |   +--- internal
+|   |   |   +--- api
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- application
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- domain
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- infrastructure
+|   |   |       +--- .gitkeep
+|   |   +--- Dockerfile
+|   |   +--- go.mod
+|   +--- storage-service
+|   |   +--- cmd
+|   |   |   +--- .gitkeep
+|   |   +--- internal
+|   |   |   +--- api
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- application
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- domain
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- infrastructure
+|   |   |       +--- .gitkeep
+|   |   +--- Dockerfile
+|   |   +--- go.mod
+|   +--- vm-service
+|       +--- cmd
+|       |   +--- .gitkeep
+|       +--- internal
+|       |   +--- api
+|       |   |   +--- .gitkeep
+|       |   +--- application
+|       |   |   +--- .gitkeep
+|       |   +--- domain
+|       |   |   +--- .gitkeep
+|       |   +--- infrastructure
+|       |       +--- .gitkeep
+|       +--- Dockerfile
+|       +--- go.mod
++--- cli
+|   +--- CleanArch.Cli
+|   |   +--- Auth
+|   |   |   +--- .gitkeep
+|   |   +--- Commands
+|   |   |   +--- Compute
+|   |   |   |   +--- .gitkeep
+|   |   |   |   +--- VmCommand.cs
+|   |   |   |   +--- VmListCommand.cs
+|   |   |   |   +--- VmProvisionCommand.cs
+|   |   |   |   +--- VmStartCommand.cs
+|   |   |   +--- Config
+|   |   |   |   +--- .gitkeep
+|   |   |   |   +--- ConfigCommand.cs
+|   |   |   +--- Identity
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Provider
+|   |   |   |   +--- .gitkeep
+|   |   |   |   +--- ProviderCommand.cs
+|   |   |   +--- Storage
+|   |   |       +--- .gitkeep
+|   |   +--- Output
+|   |   |   +--- .gitkeep
+|   |   |   +--- IOutputFormatter.cs
+|   |   |   +--- JsonFormatter.cs
+|   |   |   +--- TableFormatter.cs
+|   |   +--- CleanArch.Cli.csproj
+|   |   +--- Program.cs
+|   +--- CleanArch.DevCli
+|       +--- Commands
+|       |   +--- Analyze
+|       |   |   +--- .gitkeep
+|       |   +--- Docs
+|       |   |   +--- .gitkeep
+|       |   +--- Scaffold
+|       |   |   +--- .gitkeep
+|       |   |   +--- ScaffoldCommand.cs
+|       |   +--- Tunnel
+|       |       +--- .gitkeep
+|       +--- CleanArch.DevCli.csproj
+|       +--- Program.cs
++--- deploy
+|   +--- dapr
+|   |   +--- components
+|   |   |   +--- alibaba
+|   |   |   |   +--- pubsub.yaml
+|   |   |   |   +--- secretstore.yaml
+|   |   |   |   +--- statestore.yaml
+|   |   |   +--- aws
+|   |   |   |   +--- pubsub.yaml
+|   |   |   |   +--- secretstore.yaml
+|   |   |   |   +--- statestore.yaml
+|   |   |   +--- azure
+|   |   |   |   +--- pubsub.yaml
+|   |   |   |   +--- secretstore.yaml
+|   |   |   |   +--- statestore.yaml
+|   |   |   +--- baremetal
+|   |   |   |   +--- pubsub.yaml
+|   |   |   |   +--- secretstore.yaml
+|   |   |   |   +--- statestore.yaml
+|   |   |   +--- cloudflare
+|   |   |   |   +--- pubsub.yaml
+|   |   |   |   +--- secretstore.yaml
+|   |   |   |   +--- statestore.yaml
+|   |   |   +--- gcp
+|   |   |   |   +--- pubsub.yaml
+|   |   |   |   +--- secretstore.yaml
+|   |   |   |   +--- statestore.yaml
+|   |   |   +--- oracle
+|   |   |   |   +--- pubsub.yaml
+|   |   |   |   +--- secretstore.yaml
+|   |   |   |   +--- statestore.yaml
+|   |   |   +--- pubsub.yaml
+|   |   |   +--- secretstore.yaml
+|   |   |   +--- statestore.yaml
+|   |   +--- config.yaml
+|   +--- k8s
+|   |   +--- alibaba
+|   |   |   +--- .gitkeep
+|   |   +--- aws
+|   |   |   +--- .gitkeep
+|   |   +--- azure
+|   |   |   +--- .gitkeep
+|   |   +--- baremetal
+|   |   |   +--- .gitkeep
+|   |   +--- gcp
+|   |   |   +--- .gitkeep
+|   |   +--- oracle
+|   |   |   +--- .gitkeep
+|   |   +--- .gitkeep
+|   +--- docker-compose.yml
++--- docs
+|   +--- _template
+|   |   +--- partials
+|   |   |   +--- head.tmpl.partial
+|   |   +--- styles
+|   |       +--- main.css
+|   +--- api
+|   |   +--- toc.yml
+|   +--- articles
+|   |   +--- architecture
+|   |   |   +--- adding-a-provider.md
+|   |   |   +--- clean-architecture.md
+|   |   |   +--- domain-layer.md
+|   |   |   +--- microservices.md
+|   |   |   +--- multi-cloud.md
+|   |   |   +--- toc.yml
+|   |   +--- deployment
+|   |   |   +--- baremetal.md
+|   |   |   +--- cloudflare-workers.md
+|   |   |   +--- docker.md
+|   |   |   +--- kubernetes.md
+|   |   |   +--- toc.yml
+|   |   +--- getting-started
+|   |   |   +--- installation.md
+|   |   |   +--- overview.md
+|   |   |   +--- quickstart.md
+|   |   |   +--- toc.yml
+|   |   +--- providers
+|   |   |   +--- alibaba.md
+|   |   |   +--- aws.md
+|   |   |   +--- azure.md
+|   |   |   +--- baremetal.md
+|   |   |   +--- cloudflare.md
+|   |   |   +--- gcp.md
+|   |   |   +--- oracle.md
+|   |   |   +--- toc.yml
+|   |   +--- services
+|   |   |   +--- ai-service.md
+|   |   |   +--- identity-service.md
+|   |   |   +--- storage-service.md
+|   |   |   +--- toc.yml
+|   |   |   +--- vm-service.md
+|   |   +--- tools
+|   |       +--- analyzers.md
+|   |       +--- codeserver.md
+|   |       +--- generators.md
+|   |       +--- toc.yml
+|   +--- openapi
+|   |   +--- .gitkeep
+|   +--- postman
+|   |   +--- .gitkeep
+|   +--- prompts
+|   |   +--- 00-index.md
+|   |   +--- 01-error-handling-result-pattern.md
+|   |   +--- 02-validation-and-mapping.md
+|   |   +--- 03-inbox-idempotency.md
+|   |   +--- 04-options-configuration.md
+|   |   +--- 05-observability.md
+|   |   +--- 06-security-layer.md
+|   |   +--- 07-testing-strategy.md
+|   |   +--- 08-cloud-iac.md
+|   |   +--- 09-event-versioning-asyncapi.md
+|   |   +--- 10-feature-flags-multitenancy.md
+|   |   +--- 11-realtime-protocols.md
+|   |   +--- 12-gitops-dr.md
+|   |   +--- 13-devex.md
+|   +--- docfx.json
+|   +--- index.md
+|   +--- toc.yml
++--- logging
+|   +--- CleanArch.Logging
+|   |   +--- Configuration
+|   |   |   +--- .gitkeep
+|   |   |   +--- LoggingConfiguration.cs
+|   |   +--- Enrichers
+|   |   |   +--- .gitkeep
+|   |   |   +--- CloudProviderEnricher.cs
+|   |   |   +--- CorrelationIdEnricher.cs
+|   |   |   +--- ServiceNameEnricher.cs
+|   |   +--- Extensions
+|   |   |   +--- .gitkeep
+|   |   |   +--- LoggingServiceExtensions.cs
+|   |   +--- Middleware
+|   |   |   +--- .gitkeep
+|   |   +--- CleanArch.Logging.csproj
+|   +--- sinks
+|       +--- CleanArch.Sinks.Cloudflare
+|       |   +--- CleanArch.Sinks.Cloudflare.csproj
+|       |   +--- CloudflareLogpushSink.cs
+|       +--- CleanArch.Sinks.Loki
+|       |   +--- CleanArch.Sinks.Loki.csproj
+|       |   +--- LokiSink.cs
+|       +--- CleanArch.Sinks.Oracle
+|           +--- CleanArch.Sinks.Oracle.csproj
+|           +--- OracleLoggingSink.cs
++--- mcp
+|   +--- docs-mcp-server
+|   |   +--- src
+|   |   |   +--- DocsMcpServer
+|   |   |       +--- Resources
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- Tools
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- DocsMcpServer.csproj
+|   |   +--- Dockerfile
+|   +--- platform-mcp-server
+|   |   +--- src
+|   |   |   +--- PlatformMcpServer
+|   |   |       +--- Prompts
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- Resources
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- Tools
+|   |   |       |   +--- AI
+|   |   |       |   |   +--- .gitkeep
+|   |   |       |   +--- Compute
+|   |   |       |   |   +--- .gitkeep
+|   |   |       |   +--- Identity
+|   |   |       |   |   +--- .gitkeep
+|   |   |       |   +--- Storage
+|   |   |       |       +--- .gitkeep
+|   |   |       +--- PlatformMcpServer.csproj
+|   |   +--- Dockerfile
+|   +--- vm-mcp-server
+|       +--- src
+|       |   +--- VmMcpServer
+|       |       +--- Tools
+|       |       |   +--- .gitkeep
+|       |       +--- VmMcpServer.csproj
+|       +--- Dockerfile
++--- packages
+|   +--- npm
+|   |   +--- @cleanarch
+|   |       +--- api-client
+|   |       |   +--- src
+|   |       |   |   +--- .gitkeep
+|   |       |   +--- package.json
+|   |       +--- worker-types
+|   |           +--- src
+|   |           |   +--- .gitkeep
+|   |           +--- package.json
+|   +--- nuget
+|   |   +--- .gitkeep
+|   +--- Directory.Packages.props
++--- presentation
+|   +--- desktop
+|   |   +--- CleanArch.Desktop
+|   |       +--- ViewModels
+|   |       |   +--- .gitkeep
+|   |       +--- Views
+|   |       |   +--- .gitkeep
+|   |       +--- CleanArch.Desktop.csproj
+|   +--- flutter
+|   |   +--- integration_test
+|   |   |   +--- .gitkeep
+|   |   +--- lib
+|   |   |   +--- core
+|   |   |   |   +--- constants
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- errors
+|   |   |   |   |   +--- failures.dart
+|   |   |   |   +--- network
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- usecases
+|   |   |   |       +--- usecase.dart
+|   |   |   +--- features
+|   |   |   |   +--- ai
+|   |   |   |   |   +--- data
+|   |   |   |   |   |   +--- datasources
+|   |   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   |   +--- models
+|   |   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   |   +--- repositories
+|   |   |   |   |   |       +--- .gitkeep
+|   |   |   |   |   +--- domain
+|   |   |   |   |   |   +--- entities
+|   |   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   |   +--- repositories
+|   |   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   |   +--- usecases
+|   |   |   |   |   |       +--- .gitkeep
+|   |   |   |   |   +--- presentation
+|   |   |   |   |       +--- bloc
+|   |   |   |   |       |   +--- .gitkeep
+|   |   |   |   |       +--- pages
+|   |   |   |   |       |   +--- .gitkeep
+|   |   |   |   |       +--- widgets
+|   |   |   |   |           +--- .gitkeep
+|   |   |   |   +--- compute
+|   |   |   |   |   +--- data
+|   |   |   |   |   |   +--- datasources
+|   |   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   |   +--- models
+|   |   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   |   +--- repositories
+|   |   |   |   |   |       +--- .gitkeep
+|   |   |   |   |   +--- domain
+|   |   |   |   |   |   +--- entities
+|   |   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   |   +--- repositories
+|   |   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   |   +--- usecases
+|   |   |   |   |   |       +--- .gitkeep
+|   |   |   |   |   +--- presentation
+|   |   |   |   |       +--- bloc
+|   |   |   |   |       |   +--- .gitkeep
+|   |   |   |   |       +--- pages
+|   |   |   |   |       |   +--- .gitkeep
+|   |   |   |   |       +--- widgets
+|   |   |   |   |           +--- .gitkeep
+|   |   |   |   +--- identity
+|   |   |   |   |   +--- data
+|   |   |   |   |   |   +--- datasources
+|   |   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   |   +--- models
+|   |   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   |   +--- repositories
+|   |   |   |   |   |       +--- .gitkeep
+|   |   |   |   |   +--- domain
+|   |   |   |   |   |   +--- entities
+|   |   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   |   +--- repositories
+|   |   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   |   +--- usecases
+|   |   |   |   |   |       +--- .gitkeep
+|   |   |   |   |   +--- presentation
+|   |   |   |   |       +--- bloc
+|   |   |   |   |       |   +--- .gitkeep
+|   |   |   |   |       +--- pages
+|   |   |   |   |       |   +--- .gitkeep
+|   |   |   |   |       +--- widgets
+|   |   |   |   |           +--- .gitkeep
+|   |   |   |   +--- storage
+|   |   |   |       +--- data
+|   |   |   |       |   +--- datasources
+|   |   |   |       |   |   +--- .gitkeep
+|   |   |   |       |   +--- models
+|   |   |   |       |   |   +--- .gitkeep
+|   |   |   |       |   +--- repositories
+|   |   |   |       |       +--- .gitkeep
+|   |   |   |       +--- domain
+|   |   |   |       |   +--- entities
+|   |   |   |       |   |   +--- .gitkeep
+|   |   |   |       |   +--- repositories
+|   |   |   |       |   |   +--- .gitkeep
+|   |   |   |       |   +--- usecases
+|   |   |   |       |       +--- .gitkeep
+|   |   |   |       +--- presentation
+|   |   |   |           +--- bloc
+|   |   |   |           |   +--- .gitkeep
+|   |   |   |           +--- pages
+|   |   |   |           |   +--- .gitkeep
+|   |   |   |           +--- widgets
+|   |   |   |               +--- .gitkeep
+|   |   |   +--- injection_container.dart
+|   |   |   +--- main.dart
+|   |   +--- test
+|   |   |   +--- features
+|   |   |   |   +--- ai
+|   |   |   |   |   +--- data
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- domain
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- presentation
+|   |   |   |   |       +--- .gitkeep
+|   |   |   |   +--- compute
+|   |   |   |   |   +--- data
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- domain
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- presentation
+|   |   |   |   |       +--- .gitkeep
+|   |   |   |   +--- identity
+|   |   |   |   |   +--- data
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- domain
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- presentation
+|   |   |   |   |       +--- .gitkeep
+|   |   |   |   +--- storage
+|   |   |   |       +--- data
+|   |   |   |       |   +--- .gitkeep
+|   |   |   |       +--- domain
+|   |   |   |       |   +--- .gitkeep
+|   |   |   |       +--- presentation
+|   |   |   |           +--- .gitkeep
+|   |   |   +--- widget_test.dart
+|   |   +--- analysis_options.yaml
+|   |   +--- pubspec.lock
+|   |   +--- pubspec.yaml
+|   +--- mobile
+|   |   +--- CleanArch.Mobile
+|   |       +--- Pages
+|   |       |   +--- .gitkeep
+|   |       +--- Platforms
+|   |       |   +--- Android
+|   |       |   |   +--- .gitkeep
+|   |       |   +--- iOS
+|   |       |   |   +--- .gitkeep
+|   |       |   +--- Windows
+|   |       |       +--- .gitkeep
+|   |       +--- Services
+|   |       |   +--- .gitkeep
+|   |       +--- ViewModels
+|   |       |   +--- .gitkeep
+|   |       +--- CleanArch.Mobile.csproj
+|   +--- web
+|       +--- CleanArch.Web
+|       |   +--- Components
+|       |   |   +--- Compute
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Layout
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Shared
+|       |   |       +--- .gitkeep
+|       |   +--- Pages
+|       |   |   +--- AI
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Compute
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Dashboard
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Identity
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Storage
+|       |   |       +--- .gitkeep
+|       |   +--- Services
+|       |   |   +--- .gitkeep
+|       |   +--- State
+|       |   |   +--- .gitkeep
+|       |   +--- wwwroot
+|       |   |   +--- css
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- js
+|       |   |       +--- .gitkeep
+|       |   +--- CleanArch.Web.csproj
+|       +--- CleanArch.Web.Tests
+|           +--- Components
+|           |   +--- .gitkeep
+|           +--- Pages
+|           |   +--- .gitkeep
+|           +--- CleanArch.Web.Tests.csproj
++--- services
+|   +--- AIService
+|   |   +--- src
+|   |   |   +--- AIService.API
+|   |   |   |   +--- Controllers
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Subscribers
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- AIService.API.csproj
+|   |   |   |   +--- appsettings.json
+|   |   |   +--- AIService.Application
+|   |   |   |   +--- Behaviors
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Chains
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Commands
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Common
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- EventHandlers
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Factories
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Interfaces
+|   |   |   |   |   +--- Strategies
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Notifications
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Pipelines
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Queries
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- UseCases
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- AIService.Application.csproj
+|   |   |   +--- AIService.Domain
+|   |   |   |   +--- Builders
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Commands
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Entities
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Events
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Factories
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Interfaces
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Specifications
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Templates
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- ValueObjects
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- AIService.Domain.csproj
+|   |   |   +--- AIService.Functions
+|   |   |   |   +--- Middleware
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Triggers
+|   |   |   |   |   +--- Blob
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- Dapr
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- EventHub
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- Http
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- Queue
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- Timer
+|   |   |   |   |       +--- .gitkeep
+|   |   |   |   +--- AIService.Functions.csproj
+|   |   |   |   +--- host.json
+|   |   |   +--- AIService.Infrastructure
+|   |   |       +--- AI
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- Decorators
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- Factories
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- Messaging
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- Outbox
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- Persistence
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- Strategies
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- AIService.Infrastructure.csproj
+|   |   +--- tests
+|   |   |   +--- AIService.Application.Tests
+|   |   |   |   +--- AIService.Application.Tests.csproj
+|   |   |   +--- AIService.Domain.Tests
+|   |   |   |   +--- AIService.Domain.Tests.csproj
+|   |   |   +--- AIService.Infrastructure.Tests
+|   |   |       +--- AIService.Infrastructure.Tests.csproj
+|   |   +--- Dockerfile
+|   +--- GatewayService
+|   |   +--- src
+|   |   |   +--- GatewayService.API
+|   |   |       +--- OpenApi
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- GatewayService.API.csproj
+|   |   |       +--- yarp.json
+|   |   +--- Dockerfile
+|   +--- IdentityService
+|   |   +--- src
+|   |   |   +--- IdentityService.API
+|   |   |   |   +--- Controllers
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Subscribers
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- appsettings.json
+|   |   |   |   +--- IdentityService.API.csproj
+|   |   |   +--- IdentityService.Application
+|   |   |   |   +--- Behaviors
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Chains
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Commands
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Common
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- EventHandlers
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Factories
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Interfaces
+|   |   |   |   |   +--- Strategies
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Notifications
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Pipelines
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Queries
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- UseCases
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- IdentityService.Application.csproj
+|   |   |   +--- IdentityService.Domain
+|   |   |   |   +--- Builders
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Commands
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Entities
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Events
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Factories
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Interfaces
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Specifications
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Templates
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- ValueObjects
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- IdentityService.Domain.csproj
+|   |   |   +--- IdentityService.Functions
+|   |   |   |   +--- Middleware
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Triggers
+|   |   |   |   |   +--- Blob
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- Dapr
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- EventHub
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- Http
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- Queue
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- Timer
+|   |   |   |   |       +--- .gitkeep
+|   |   |   |   +--- host.json
+|   |   |   |   +--- IdentityService.Functions.csproj
+|   |   |   +--- IdentityService.Infrastructure
+|   |   |       +--- Decorators
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- Factories
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- Identity
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- Messaging
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- Outbox
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- Persistence
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- Strategies
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- IdentityService.Infrastructure.csproj
+|   |   +--- tests
+|   |   |   +--- IdentityService.Application.Tests
+|   |   |   |   +--- IdentityService.Application.Tests.csproj
+|   |   |   +--- IdentityService.Domain.Tests
+|   |   |   |   +--- IdentityService.Domain.Tests.csproj
+|   |   |   +--- IdentityService.Infrastructure.Tests
+|   |   |       +--- IdentityService.Infrastructure.Tests.csproj
+|   |   +--- Dockerfile
+|   +--- StorageService
+|   |   +--- src
+|   |   |   +--- StorageService.API
+|   |   |   |   +--- Controllers
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Subscribers
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- appsettings.json
+|   |   |   |   +--- StorageService.API.csproj
+|   |   |   +--- StorageService.Application
+|   |   |   |   +--- Behaviors
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Chains
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Commands
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Common
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- EventHandlers
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Factories
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Interfaces
+|   |   |   |   |   +--- Strategies
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Notifications
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Pipelines
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Queries
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- UseCases
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- StorageService.Application.csproj
+|   |   |   +--- StorageService.Domain
+|   |   |   |   +--- Builders
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Commands
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Entities
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Events
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Factories
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Interfaces
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Specifications
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Templates
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- ValueObjects
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- StorageService.Domain.csproj
+|   |   |   +--- StorageService.Functions
+|   |   |   |   +--- Middleware
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Triggers
+|   |   |   |   |   +--- Blob
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- Dapr
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- EventHub
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- Http
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- Queue
+|   |   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- Timer
+|   |   |   |   |       +--- .gitkeep
+|   |   |   |   +--- host.json
+|   |   |   |   +--- StorageService.Functions.csproj
+|   |   |   +--- StorageService.Infrastructure
+|   |   |       +--- Decorators
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- Factories
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- Messaging
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- Outbox
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- Persistence
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- Storage
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- Strategies
+|   |   |       |   +--- .gitkeep
+|   |   |       +--- StorageService.Infrastructure.csproj
+|   |   +--- tests
+|   |   |   +--- StorageService.Application.Tests
+|   |   |   |   +--- StorageService.Application.Tests.csproj
+|   |   |   +--- StorageService.Domain.Tests
+|   |   |   |   +--- StorageService.Domain.Tests.csproj
+|   |   |   +--- StorageService.Infrastructure.Tests
+|   |   |       +--- StorageService.Infrastructure.Tests.csproj
+|   |   +--- Dockerfile
+|   +--- VirtualMachineService
+|       +--- src
+|       |   +--- VirtualMachineService.API
+|       |   |   +--- Controllers
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Subscribers
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- appsettings.json
+|       |   |   +--- VirtualMachineService.API.csproj
+|       |   +--- VirtualMachineService.Application
+|       |   |   +--- Behaviors
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Chains
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Commands
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Common
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- EventHandlers
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Factories
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Interfaces
+|       |   |   |   +--- Strategies
+|       |   |   |   |   +--- .gitkeep
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Notifications
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Pipelines
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Queries
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- UseCases
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- VirtualMachineService.Application.csproj
+|       |   +--- VirtualMachineService.Domain
+|       |   |   +--- Builders
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Commands
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Entities
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Events
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Factories
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Interfaces
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Specifications
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Templates
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- ValueObjects
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- VirtualMachineService.Domain.csproj
+|       |   +--- VirtualMachineService.Functions
+|       |   |   +--- Middleware
+|       |   |   |   +--- .gitkeep
+|       |   |   +--- Triggers
+|       |   |   |   +--- Blob
+|       |   |   |   |   +--- .gitkeep
+|       |   |   |   +--- Dapr
+|       |   |   |   |   +--- .gitkeep
+|       |   |   |   +--- EventHub
+|       |   |   |   |   +--- .gitkeep
+|       |   |   |   +--- Http
+|       |   |   |   |   +--- .gitkeep
+|       |   |   |   +--- Queue
+|       |   |   |   |   +--- .gitkeep
+|       |   |   |   +--- Timer
+|       |   |   |       +--- .gitkeep
+|       |   |   +--- host.json
+|       |   |   +--- VirtualMachineService.Functions.csproj
+|       |   +--- VirtualMachineService.Infrastructure
+|       |       +--- Compute
+|       |       |   +--- .gitkeep
+|       |       +--- Decorators
+|       |       |   +--- .gitkeep
+|       |       +--- Factories
+|       |       |   +--- .gitkeep
+|       |       +--- Messaging
+|       |       |   +--- .gitkeep
+|       |       +--- Outbox
+|       |       |   +--- .gitkeep
+|       |       +--- Persistence
+|       |       |   +--- .gitkeep
+|       |       +--- Strategies
+|       |       |   +--- .gitkeep
+|       |       +--- VirtualMachineService.Infrastructure.csproj
+|       +--- tests
+|       |   +--- VirtualMachineService.Application.Tests
+|       |   |   +--- VirtualMachineService.Application.Tests.csproj
+|       |   +--- VirtualMachineService.Domain.Tests
+|       |   |   +--- VirtualMachineService.Domain.Tests.csproj
+|       |   +--- VirtualMachineService.Infrastructure.Tests
+|       |       +--- VirtualMachineService.Infrastructure.Tests.csproj
+|       +--- Dockerfile
++--- shared
+|   +--- CleanArch.Shared.Contracts
+|   |   +--- Commands
+|   |   |   +--- .gitkeep
+|   |   |   +--- ProvisionVmCommandContract.cs
+|   |   +--- Events
+|   |   |   +--- Compute
+|   |   |   |   +--- .gitkeep
+|   |   |   |   +--- VmProvisionedIntegrationEvent.cs
+|   |   |   |   +--- VmStartedIntegrationEvent.cs
+|   |   |   +--- Identity
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Storage
+|   |   |       +--- .gitkeep
+|   |   +--- CleanArch.Shared.Contracts.csproj
+|   +--- CleanArch.Shared.Domain
+|   |   +--- Interfaces
+|   |   |   +--- .gitkeep
+|   |   |   +--- IDomainEvent.cs
+|   |   |   +--- IDomainEventHandler.cs
+|   |   +--- Primitives
+|   |   |   +--- AuditableEntity.cs
+|   |   |   +--- Entity.cs
+|   |   +--- ValueObjects
+|   |   |   +--- .gitkeep
+|   |   +--- CleanArch.Shared.Domain.csproj
+|   +--- CleanArch.Shared.Infrastructure
+|       +--- Dapr
+|       |   +--- .gitkeep
+|       +--- Middleware
+|       |   +--- .gitkeep
+|       |   +--- CorrelationIdMiddleware.cs
+|       |   +--- ExceptionHandlingMiddleware.cs
+|       +--- Observability
+|       |   +--- .gitkeep
+|       +--- CleanArch.Shared.Infrastructure.csproj
++--- src
+|   +--- CleanArch.API
+|   |   +--- Controllers
+|   |   |   +--- .gitkeep
+|   |   |   +--- VmController.cs
+|   |   +--- Middleware
+|   |   |   +--- .gitkeep
+|   |   +--- OpenApi
+|   |   |   +--- Examples
+|   |   |       +--- .gitkeep
+|   |   +--- appsettings.json
+|   |   +--- CleanArch.API.csproj
+|   |   +--- Program.cs
+|   +--- CleanArch.Application
+|   |   +--- Behaviors
+|   |   |   +--- .gitkeep
+|   |   |   +--- AuthorizationBehavior.cs
+|   |   |   +--- CachingBehavior.cs
+|   |   |   +--- LoggingBehavior.cs
+|   |   |   +--- PerformanceBehavior.cs
+|   |   |   +--- TransactionBehavior.cs
+|   |   |   +--- ValidationBehavior.cs
+|   |   +--- Chains
+|   |   |   +--- Compute
+|   |   |   |   +--- .gitkeep
+|   |   |   |   +--- ProvisionVmChainHandlers.cs
+|   |   |   +--- RequestChainHandler.cs
+|   |   +--- Commands
+|   |   |   +--- Compute
+|   |   |   |   +--- .gitkeep
+|   |   |   |   +--- ProvisionVmCommand.cs
+|   |   |   |   +--- ProvisionVmCommandHandler.cs
+|   |   |   |   +--- StartVmCommand.cs
+|   |   |   |   +--- StartVmCommandHandler.cs
+|   |   |   |   +--- StopVmCommand.cs
+|   |   |   +--- Identity
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Storage
+|   |   |       +--- .gitkeep
+|   |   +--- Common
+|   |   |   +--- .gitkeep
+|   |   |   +--- ICommand.cs
+|   |   |   +--- ICommandHandler.cs
+|   |   +--- DTOs
+|   |   |   +--- AI
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Compute
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Database
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Identity
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Messaging
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Storage
+|   |   |       +--- .gitkeep
+|   |   +--- Factories
+|   |   |   +--- Compute
+|   |   |       +--- .gitkeep
+|   |   |       +--- VmProvisioningContextFactory.cs
+|   |   +--- Interfaces
+|   |   |   +--- AI
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Analytics
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Compute
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Database
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- DevOps
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Identity
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Messaging
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Networking
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Observability
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Secrets
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Storage
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Strategies
+|   |   |   |   +--- .gitkeep
+|   |   |   |   +--- IProviderSelectionStrategy.cs
+|   |   |   +--- ICacheService.cs
+|   |   |   +--- ICurrentUserService.cs
+|   |   |   +--- IDashboardService.cs
+|   |   |   +--- IEmailService.cs
+|   |   |   +--- IMessageBusService.cs
+|   |   |   +--- IObjectStorageService.cs
+|   |   |   +--- IPricingService.cs
+|   |   |   +--- IRateLimiter.cs
+|   |   |   +--- IUnitOfWork.cs
+|   |   |   +--- IVirtualMachineService.cs
+|   |   +--- Notifications
+|   |   |   +--- .gitkeep
+|   |   |   +--- VmProvisionedNotification.cs
+|   |   |   +--- VmProvisionedNotificationHandlers.cs
+|   |   +--- Pipelines
+|   |   |   +--- Compute
+|   |   |   |   +--- Steps
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- CheckQuotaStep.cs
+|   |   |   |   |   +--- ConfigureNetworkStep.cs
+|   |   |   |   |   +--- InstallAgentStep.cs
+|   |   |   |   |   +--- NotifyCompletionStep.cs
+|   |   |   |   |   +--- ProvisionVmStep.cs
+|   |   |   |   |   +--- ReserveResourcesStep.cs
+|   |   |   |   |   +--- ValidateVmNameStep.cs
+|   |   |   |   +--- VmProvisioningContext.cs
+|   |   |   |   +--- VmProvisioningPipeline.cs
+|   |   |   +--- Identity
+|   |   |   |   +--- Steps
+|   |   |   |       +--- .gitkeep
+|   |   |   +--- IPipelineStep.cs
+|   |   |   +--- Pipeline.cs
+|   |   |   +--- PipelineBuilder.cs
+|   |   |   +--- PipelineContext.cs
+|   |   +--- Queries
+|   |   |   +--- Compute
+|   |   |   |   +--- .gitkeep
+|   |   |   |   +--- GetAllVmsQuery.cs
+|   |   |   |   +--- GetVmByIdQuery.cs
+|   |   |   |   +--- GetVmByIdQueryHandler.cs
+|   |   |   +--- Identity
+|   |   |       +--- .gitkeep
+|   |   +--- UseCases
+|   |   |   +--- AI
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Compute
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Containers
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Database
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Identity
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Messaging
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Storage
+|   |   |       +--- .gitkeep
+|   |   +--- CleanArch.Application.csproj
+|   +--- CleanArch.Domain
+|   |   +--- Builders
+|   |   |   +--- .gitkeep
+|   |   |   +--- VirtualMachineBuilder.cs
+|   |   +--- Commands
+|   |   |   +--- Compute
+|   |   |   |   +--- .gitkeep
+|   |   |   |   +--- ResizeVmDomainCommand.cs
+|   |   |   |   +--- StartVmDomainCommand.cs
+|   |   |   |   +--- StopVmDomainCommand.cs
+|   |   |   +--- CommandInvoker.cs
+|   |   |   +--- IDomainCommand.cs
+|   |   +--- Entities
+|   |   |   +--- AI
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Common
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Compute
+|   |   |   |   +--- .gitkeep
+|   |   |   |   +--- VirtualMachine.cs
+|   |   |   +--- Database
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Identity
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Messaging
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Networking
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Storage
+|   |   |       +--- .gitkeep
+|   |   +--- Enums
+|   |   |   +--- AI
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Compute
+|   |   |   |   +--- .gitkeep
+|   |   |   |   +--- OsType.cs
+|   |   |   |   +--- VmStatus.cs
+|   |   |   +--- Database
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Identity
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Storage
+|   |   |       +--- .gitkeep
+|   |   +--- Events
+|   |   |   +--- Compute
+|   |   |   |   +--- .gitkeep
+|   |   |   |   +--- VmProvisionedEvent.cs
+|   |   |   |   +--- VmStartedEvent.cs
+|   |   |   +--- Database
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Identity
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Storage
+|   |   |       +--- .gitkeep
+|   |   +--- Exceptions
+|   |   |   +--- .gitkeep
+|   |   |   +--- DomainException.cs
+|   |   |   +--- InvalidDomainStateException.cs
+|   |   |   +--- QuotaExceededException.cs
+|   |   +--- Factories
+|   |   |   +--- Compute
+|   |   |   |   +--- .gitkeep
+|   |   |   |   +--- VirtualMachineFactory.cs
+|   |   |   +--- ICloudResourceFactory.cs
+|   |   |   +--- IVirtualMachineFactory.cs
+|   |   +--- Interfaces
+|   |   |   +--- Repositories
+|   |   |   |   +--- Compute
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- IVirtualMachineRepository.cs
+|   |   |   |   +--- Database
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Identity
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- Storage
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- IRepository.cs
+|   |   |   +--- IQuotaService.cs
+|   |   +--- Rules
+|   |   |   +--- Compute
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Identity
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Storage
+|   |   |       +--- .gitkeep
+|   |   +--- Specifications
+|   |   |   +--- Compute
+|   |   |   |   +--- .gitkeep
+|   |   |   |   +--- RunningVmsSpecification.cs
+|   |   |   |   +--- StaleVmsSpecification.cs
+|   |   |   |   +--- VmsByOwnerSpecification.cs
+|   |   |   |   +--- VmsByRegionSpecification.cs
+|   |   |   +--- BaseSpecification.cs
+|   |   |   +--- CompositeSpecification.cs
+|   |   |   +--- ISpecification.cs
+|   |   +--- Templates
+|   |   |   +--- .gitkeep
+|   |   |   +--- ResourceProvisioningTemplate.cs
+|   |   |   +--- VmProvisioningTemplate.cs
+|   |   +--- ValueObjects
+|   |   |   +--- AI
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Common
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Compute
+|   |   |   |   +--- .gitkeep
+|   |   |   |   +--- MachineSize.cs
+|   |   |   |   +--- Region.cs
+|   |   |   |   +--- ResourceName.cs
+|   |   |   +--- Database
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Identity
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Storage
+|   |   |       +--- .gitkeep
+|   |   +--- CleanArch.Domain.csproj
+|   +--- CleanArch.Functions
+|   |   +--- Middleware
+|   |   |   +--- .gitkeep
+|   |   +--- Triggers
+|   |   |   +--- Blob
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Dapr
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- EventHub
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Http
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Queue
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Timer
+|   |   |       +--- .gitkeep
+|   |   +--- CleanArch.Functions.csproj
+|   |   +--- host.json
+|   |   +--- local.settings.json
+|   +--- CleanArch.Infrastructure.Alibaba
+|   |   +--- AI
+|   |   |   +--- .gitkeep
+|   |   +--- Analytics
+|   |   |   +--- .gitkeep
+|   |   +--- Compute
+|   |   |   +--- .gitkeep
+|   |   +--- Database
+|   |   |   +--- .gitkeep
+|   |   +--- DevOps
+|   |   |   +--- .gitkeep
+|   |   +--- Factories
+|   |   |   +--- .gitkeep
+|   |   +--- Identity
+|   |   |   +--- .gitkeep
+|   |   +--- Messaging
+|   |   |   +--- .gitkeep
+|   |   +--- Networking
+|   |   |   +--- .gitkeep
+|   |   +--- Observability
+|   |   |   +--- .gitkeep
+|   |   +--- Persistence
+|   |   |   +--- Migrations
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Repositories
+|   |   |       +--- .gitkeep
+|   |   +--- Secrets
+|   |   |   +--- .gitkeep
+|   |   +--- Storage
+|   |   |   +--- .gitkeep
+|   |   +--- Strategies
+|   |   |   +--- Pricing
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- ProviderSelection
+|   |   |       +--- .gitkeep
+|   |   +--- CleanArch.Infrastructure.Alibaba.csproj
+|   |   +--- DependencyInjection.cs
+|   +--- CleanArch.Infrastructure.AWS
+|   |   +--- AI
+|   |   |   +--- .gitkeep
+|   |   +--- Analytics
+|   |   |   +--- .gitkeep
+|   |   +--- Compute
+|   |   |   +--- .gitkeep
+|   |   +--- Database
+|   |   |   +--- .gitkeep
+|   |   +--- DevOps
+|   |   |   +--- .gitkeep
+|   |   +--- Factories
+|   |   |   +--- .gitkeep
+|   |   +--- Identity
+|   |   |   +--- .gitkeep
+|   |   +--- Messaging
+|   |   |   +--- .gitkeep
+|   |   +--- Networking
+|   |   |   +--- .gitkeep
+|   |   +--- Observability
+|   |   |   +--- .gitkeep
+|   |   +--- Persistence
+|   |   |   +--- Migrations
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Repositories
+|   |   |       +--- .gitkeep
+|   |   +--- Secrets
+|   |   |   +--- .gitkeep
+|   |   +--- Storage
+|   |   |   +--- .gitkeep
+|   |   +--- Strategies
+|   |   |   +--- Pricing
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- ProviderSelection
+|   |   |       +--- .gitkeep
+|   |   +--- CleanArch.Infrastructure.AWS.csproj
+|   |   +--- DependencyInjection.cs
+|   +--- CleanArch.Infrastructure.Azure
+|   |   +--- AI
+|   |   |   +--- .gitkeep
+|   |   +--- Analytics
+|   |   |   +--- .gitkeep
+|   |   +--- Compute
+|   |   |   +--- .gitkeep
+|   |   +--- Database
+|   |   |   +--- .gitkeep
+|   |   +--- DevOps
+|   |   |   +--- .gitkeep
+|   |   +--- Factories
+|   |   |   +--- .gitkeep
+|   |   +--- Identity
+|   |   |   +--- .gitkeep
+|   |   +--- Messaging
+|   |   |   +--- .gitkeep
+|   |   +--- Networking
+|   |   |   +--- .gitkeep
+|   |   +--- Observability
+|   |   |   +--- .gitkeep
+|   |   +--- Persistence
+|   |   |   +--- Migrations
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Repositories
+|   |   |       +--- .gitkeep
+|   |   +--- Secrets
+|   |   |   +--- .gitkeep
+|   |   +--- Storage
+|   |   |   +--- .gitkeep
+|   |   +--- Strategies
+|   |   |   +--- Pricing
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- ProviderSelection
+|   |   |       +--- .gitkeep
+|   |   |       +--- CostOptimizedProviderStrategy.cs
+|   |   +--- CleanArch.Infrastructure.Azure.csproj
+|   |   +--- DependencyInjection.cs
+|   +--- CleanArch.Infrastructure.BareMetal
+|   |   +--- AI
+|   |   |   +--- .gitkeep
+|   |   +--- Analytics
+|   |   |   +--- .gitkeep
+|   |   +--- Compute
+|   |   |   +--- .gitkeep
+|   |   +--- Database
+|   |   |   +--- .gitkeep
+|   |   +--- DevOps
+|   |   |   +--- .gitkeep
+|   |   +--- Factories
+|   |   |   +--- .gitkeep
+|   |   +--- Identity
+|   |   |   +--- .gitkeep
+|   |   +--- Messaging
+|   |   |   +--- .gitkeep
+|   |   +--- Networking
+|   |   |   +--- .gitkeep
+|   |   +--- Observability
+|   |   |   +--- .gitkeep
+|   |   +--- Persistence
+|   |   |   +--- Migrations
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Repositories
+|   |   |       +--- .gitkeep
+|   |   +--- Secrets
+|   |   |   +--- .gitkeep
+|   |   +--- Storage
+|   |   |   +--- .gitkeep
+|   |   +--- Strategies
+|   |   |   +--- Pricing
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- ProviderSelection
+|   |   |       +--- .gitkeep
+|   |   +--- CleanArch.Infrastructure.BareMetal.csproj
+|   |   +--- DependencyInjection.cs
+|   +--- CleanArch.Infrastructure.Cloudflare
+|   |   +--- AI
+|   |   |   +--- .gitkeep
+|   |   +--- Analytics
+|   |   |   +--- .gitkeep
+|   |   +--- Caching
+|   |   |   +--- .gitkeep
+|   |   +--- Compute
+|   |   |   +--- .gitkeep
+|   |   +--- Database
+|   |   |   +--- .gitkeep
+|   |   +--- DevOps
+|   |   |   +--- .gitkeep
+|   |   +--- Factories
+|   |   |   +--- .gitkeep
+|   |   +--- Identity
+|   |   |   +--- .gitkeep
+|   |   +--- Messaging
+|   |   |   +--- .gitkeep
+|   |   +--- Networking
+|   |   |   +--- .gitkeep
+|   |   +--- Observability
+|   |   |   +--- .gitkeep
+|   |   +--- Persistence
+|   |   |   +--- Migrations
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Repositories
+|   |   |       +--- .gitkeep
+|   |   +--- Secrets
+|   |   |   +--- .gitkeep
+|   |   +--- Storage
+|   |   |   +--- .gitkeep
+|   |   +--- Strategies
+|   |   |   +--- Pricing
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- ProviderSelection
+|   |   |       +--- .gitkeep
+|   |   +--- Tunnel
+|   |   |   +--- .gitkeep
+|   |   +--- CleanArch.Infrastructure.Cloudflare.csproj
+|   |   +--- DependencyInjection.cs
+|   +--- CleanArch.Infrastructure.Common
+|   |   +--- Caching
+|   |   |   +--- .gitkeep
+|   |   +--- Decorators
+|   |   |   +--- Messaging
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Storage
+|   |   |       +--- .gitkeep
+|   |   |       +--- CachedObjectStorageDecorator.cs
+|   |   |       +--- LoggedObjectStorageDecorator.cs
+|   |   |       +--- RetryObjectStorageDecorator.cs
+|   |   +--- Observability
+|   |   |   +--- .gitkeep
+|   |   +--- Outbox
+|   |   |   +--- .gitkeep
+|   |   |   +--- IOutboxRepository.cs
+|   |   |   +--- OutboxMessage.cs
+|   |   |   +--- OutboxMessageBusDecorator.cs
+|   |   |   +--- OutboxProcessor.cs
+|   |   +--- Persistence
+|   |   |   +--- .gitkeep
+|   |   |   +--- AppDbContext.cs
+|   |   |   +--- DomainEventMapper.cs
+|   |   |   +--- SpecificationEvaluator.cs
+|   |   |   +--- UnitOfWork.cs
+|   |   |   +--- VirtualMachineRepository.cs
+|   |   +--- Resilience
+|   |   |   +--- .gitkeep
+|   |   +--- Serialization
+|   |   |   +--- .gitkeep
+|   |   +--- CleanArch.Infrastructure.Common.csproj
+|   +--- CleanArch.Infrastructure.GCP
+|   |   +--- AI
+|   |   |   +--- .gitkeep
+|   |   +--- Analytics
+|   |   |   +--- .gitkeep
+|   |   +--- Compute
+|   |   |   +--- .gitkeep
+|   |   +--- Database
+|   |   |   +--- .gitkeep
+|   |   +--- DevOps
+|   |   |   +--- .gitkeep
+|   |   +--- Factories
+|   |   |   +--- .gitkeep
+|   |   +--- Identity
+|   |   |   +--- .gitkeep
+|   |   +--- Messaging
+|   |   |   +--- .gitkeep
+|   |   +--- Networking
+|   |   |   +--- .gitkeep
+|   |   +--- Observability
+|   |   |   +--- .gitkeep
+|   |   +--- Persistence
+|   |   |   +--- Migrations
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Repositories
+|   |   |       +--- .gitkeep
+|   |   +--- Secrets
+|   |   |   +--- .gitkeep
+|   |   +--- Storage
+|   |   |   +--- .gitkeep
+|   |   +--- Strategies
+|   |   |   +--- Pricing
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- ProviderSelection
+|   |   |       +--- .gitkeep
+|   |   +--- CleanArch.Infrastructure.GCP.csproj
+|   |   +--- DependencyInjection.cs
+|   +--- CleanArch.Infrastructure.Oracle
+|       +--- AI
+|       |   +--- .gitkeep
+|       +--- Analytics
+|       |   +--- .gitkeep
+|       +--- Compute
+|       |   +--- .gitkeep
+|       +--- Database
+|       |   +--- .gitkeep
+|       +--- DevOps
+|       |   +--- .gitkeep
+|       +--- Factories
+|       |   +--- .gitkeep
+|       +--- Identity
+|       |   +--- .gitkeep
+|       +--- Messaging
+|       |   +--- .gitkeep
+|       +--- Networking
+|       |   +--- .gitkeep
+|       +--- Observability
+|       |   +--- .gitkeep
+|       +--- Persistence
+|       |   +--- Migrations
+|       |   |   +--- .gitkeep
+|       |   +--- Repositories
+|       |       +--- .gitkeep
+|       +--- Secrets
+|       |   +--- .gitkeep
+|       +--- Storage
+|       |   +--- .gitkeep
+|       +--- Strategies
+|       |   +--- Pricing
+|       |   |   +--- .gitkeep
+|       |   +--- ProviderSelection
+|       |       +--- .gitkeep
+|       +--- CleanArch.Infrastructure.Oracle.csproj
+|       +--- DependencyInjection.cs
++--- tests
+|   +--- CleanArch.Application.Tests
+|   |   +--- CleanArch.Application.Tests.csproj
+|   +--- CleanArch.Domain.Tests
+|   |   +--- CleanArch.Domain.Tests.csproj
+|   +--- CleanArch.Infrastructure.Alibaba.Tests
+|   |   +--- CleanArch.Infrastructure.Alibaba.Tests.csproj
+|   +--- CleanArch.Infrastructure.AWS.Tests
+|   |   +--- CleanArch.Infrastructure.AWS.Tests.csproj
+|   +--- CleanArch.Infrastructure.Azure.Tests
+|   |   +--- CleanArch.Infrastructure.Azure.Tests.csproj
+|   +--- CleanArch.Infrastructure.BareMetal.Tests
+|   |   +--- CleanArch.Infrastructure.BareMetal.Tests.csproj
+|   +--- CleanArch.Infrastructure.Cloudflare.Tests
+|   |   +--- CleanArch.Infrastructure.Cloudflare.Tests.csproj
+|   +--- CleanArch.Infrastructure.GCP.Tests
+|   |   +--- CleanArch.Infrastructure.GCP.Tests.csproj
+|   +--- CleanArch.Infrastructure.Oracle.Tests
+|       +--- CleanArch.Infrastructure.Oracle.Tests.csproj
++--- tools
+|   +--- analyzers
+|   |   +--- CleanArch.Analyzers
+|   |   |   +--- Application
+|   |   |   |   +--- .gitkeep
+|   |   |   +--- Architecture
+|   |   |   |   +--- .gitkeep
+|   |   |   |   +--- EntityPrivateSetterAnalyzer.cs
+|   |   |   +--- Domain
+|   |   |   |   +--- .gitkeep
+|   |   |   |   +--- DomainLayerAnalyzer.cs
+|   |   |   +--- Naming
+|   |   |   |   +--- .gitkeep
+|   |   |   |   +--- CloudNeutralNamingAnalyzer.cs
+|   |   |   +--- Security
+|   |   |   |   +--- .gitkeep
+|   |   |   |   +--- NoHardcodedSecretsAnalyzer.cs
+|   |   |   +--- CleanArch.Analyzers.csproj
+|   |   |   +--- DiagnosticDescriptors.cs
+|   |   +--- CleanArch.Analyzers.Tests
+|   |       +--- Architecture
+|   |       |   +--- .gitkeep
+|   |       +--- Domain
+|   |       |   +--- .gitkeep
+|   |       |   +--- DomainLayerAnalyzerTests.cs
+|   |       +--- Helpers
+|   |       |   +--- .gitkeep
+|   |       |   +--- AnalyzerTestHelper.cs
+|   |       +--- Naming
+|   |       |   +--- CloudNeutralNamingAnalyzerTests.cs
+|   |       +--- CleanArch.Analyzers.Tests.csproj
+|   +--- codefixes
+|   |   +--- CleanArch.CodeFixes
+|   |       +--- Architecture
+|   |       |   +--- .gitkeep
+|   |       +--- Domain
+|   |       |   +--- .gitkeep
+|   |       +--- Naming
+|   |       |   +--- .gitkeep
+|   |       +--- Security
+|   |       |   +--- .gitkeep
+|   |       +--- AddPrivateSetterCodeFix.cs
+|   |       +--- CleanArch.CodeFixes.csproj
+|   |       +--- ReplaceHardcodedSecretCodeFix.cs
+|   +--- codeserver
+|   |   +--- devcontainer
+|   |   |   +--- devcontainer.json
+|   |   |   +--- post-create.sh
+|   |   +--- settings
+|   |   |   +--- extensions.json
+|   |   |   +--- keybindings.json
+|   |   |   +--- settings.json
+|   |   +--- tasks
+|   |   |   +--- build.sh
+|   |   |   +--- run-all-services.sh
+|   |   |   +--- test.sh
+|   |   +--- docker-compose.yml
+|   |   +--- Dockerfile
+|   +--- generators
+|   |   +--- CleanArch.Generators
+|   |       +--- Contracts
+|   |       |   +--- .gitkeep
+|   |       +--- DependencyInjection
+|   |       |   +--- .gitkeep
+|   |       +--- Helpers
+|   |       |   +--- .gitkeep
+|   |       +--- OpenApi
+|   |       |   +--- .gitkeep
+|   |       +--- Repository
+|   |       |   +--- .gitkeep
+|   |       +--- UseCase
+|   |       |   +--- .gitkeep
+|   |       +--- CleanArch.Generators.csproj
+|   |       +--- DIRegistrationGenerator.cs
+|   |       +--- RepositoryGenerator.cs
+|   +--- linters
+|       +--- CleanArch.Linting
+|       |   +--- Rules
+|       |   |   +--- .gitkeep
+|       |   +--- Tests
+|       |   |   +--- .gitkeep
+|       |   |   +--- ArchitectureTests.cs
+|       |   +--- CleanArch.Linting.csproj
+|       +--- .editorconfig
+|       +--- .globalconfig
+|       +--- .roslynatorconfig
+|       +--- Directory.Build.props
+|       +--- stylecop.json
++--- tunnel
+|   +--- cloudflared
+|   |   +--- credentials
+|   |   |   +--- .gitkeep
+|   |   +--- config.yaml
+|   |   +--- Dockerfile
+|   +--- config
+|       +--- baremetal.yaml
+|       +--- k8s-ingress.yaml
+|       +--- local-dev.yaml
++--- watchers
+|   +--- CleanArch.FileWatcher
+|   |   +--- Extensions
+|   |   |   +--- .gitkeep
+|   |   |   +--- FileWatcherExtensions.cs
+|   |   +--- Handlers
+|   |   |   +--- .gitkeep
+|   |   |   +--- BlobSyncHandler.cs
+|   |   |   +--- IFileChangedHandler.cs
+|   |   +--- Watchers
+|   |   |   +--- .gitkeep
+|   |   |   +--- ConfigFileWatcher.cs
+|   |   +--- CleanArch.FileWatcher.csproj
+|   +--- config
+|       +--- watchers.json
++--- workers
+|   +--- cf-workers
+|   |   +--- ai-worker
+|   |   |   +--- src
+|   |   |   |   +--- handlers
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- inference.ts
+|   |   |   |   +--- middleware
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- index.ts
+|   |   |   +--- package.json
+|   |   |   +--- tsconfig.json
+|   |   |   +--- wrangler.toml
+|   |   +--- auth-worker
+|   |   |   +--- src
+|   |   |   |   +--- handlers
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- middleware
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- jwt.ts
+|   |   |   |   +--- index.ts
+|   |   |   +--- package.json
+|   |   |   +--- tsconfig.json
+|   |   |   +--- wrangler.toml
+|   |   +--- gateway-worker
+|   |   |   +--- src
+|   |   |   |   +--- handlers
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   +--- middleware
+|   |   |   |   |   +--- .gitkeep
+|   |   |   |   |   +--- cors.ts
+|   |   |   |   |   +--- rateLimit.ts
+|   |   |   |   +--- index.ts
+|   |   |   |   +--- router.ts
+|   |   |   +--- package.json
+|   |   |   +--- tsconfig.json
+|   |   |   +--- wrangler.toml
+|   |   +--- storage-worker
+|   |       +--- src
+|   |       |   +--- handlers
+|   |       |   |   +--- .gitkeep
+|   |       |   |   +--- list.ts
+|   |       |   |   +--- upload.ts
+|   |       |   +--- middleware
+|   |       |   |   +--- .gitkeep
+|   |       |   +--- index.ts
+|   |       +--- package.json
+|   |       +--- tsconfig.json
+|   |       +--- wrangler.toml
+|   +--- CleanArch.Workers
+|       +--- Compute
+|       |   +--- .gitkeep
+|       |   +--- VmHealthCheckWorker.cs
+|       +--- Maintenance
+|       |   +--- .gitkeep
+|       +--- Messaging
+|       |   +--- .gitkeep
+|       |   +--- EventProcessorWorker.cs
+|       +--- Sync
+|       |   +--- .gitkeep
+|       +--- CleanArch.Workers.csproj
+|       +--- Program.cs
++--- .gitignore
++--- CleanArch.slnx
++--- README.md
++--- scaffold.sh

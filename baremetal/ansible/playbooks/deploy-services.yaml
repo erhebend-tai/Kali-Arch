@@ -1,0 +1,13 @@
+---
+- name: Deploy platform services
+  hosts: baremetal
+  become: true
+  tasks:
+    - name: Copy docker-compose for bare metal
+      template:
+        src: docker-compose.baremetal.yml.j2
+        dest: "{{ platform_dir }}/docker-compose.yml"
+    - name: Start all services
+      community.docker.docker_compose_v2:
+        project_src: "{{ platform_dir }}"
+        state: present

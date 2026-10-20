@@ -1,0 +1,41 @@
+# Sloth SLO definitions — generate rules with:
+#   sloth generate -i observability/slos/platform-slos.yml
+version: "prometheus/v1"
+service: cleanarch-api
+slos:
+  - name: availability
+    objective: 99.9
+    description: "Successful non-5xx responses."
+    sli:
+      events:
+        error_query: |
+          sum(rate(platform_errors_total[{{.window}}]))
+        total_query: |
+          sum(rate(platform_requests_total[{{.window}}]))
+    alerting:
+      name: ApiAvailabilityBurn
+      page_alert:
+        labels:
+          severity: critical
+      ticket_alert:
+        labels:
+          severity: warning
+
+  - name: latency
+    objective: 99.0
+    description: "Requests completing under 500ms."
+    sli:
+      events:
+        error_query: |
+          histogram_quantile(0.5,
+            rate(platform_request_duration_ms_bucket[{{.window}}])) > 500
+        total_query: |
+          sum(rate(platform_requests_total[{{.window}}]))
+    alerting:
+      name: ApiLatencyBurn
+      page_alert:
+        labels:
+          severity: critical
+      ticket_alert:
+        labels:
+          severity: warning

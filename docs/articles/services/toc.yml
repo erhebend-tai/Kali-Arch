@@ -1,0 +1,8 @@
+- name: vm service
+  href: vm-service.md
+- name: identity service
+  href: identity-service.md
+- name: ai service
+  href: ai-service.md
+- name: storage service
+  href: storage-service.md

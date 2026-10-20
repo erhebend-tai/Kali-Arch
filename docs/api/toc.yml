@@ -1,0 +1,3 @@
+# DocFX fills this in from the metadata step (src/**, services/**).
+- name: Namespaces
+  href: .

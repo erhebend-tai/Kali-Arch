@@ -1,0 +1,8 @@
+{
+  "FileWatcher": {
+    "Config":   { "Path": "appsettings.json", "HotReload": true },
+    "BlobSync": { "LocalPath": "./sync", "Container": "uploads" },
+    "Schema":   { "Path": "docs/openapi", "Validate": true },
+    "Certificate": { "Path": "/etc/ssl/certs", "RenewBeforeDays": 14 }
+  }
+}

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# .githooks/pre-commit — enable with: git config core.hooksPath .githooks
+set -e
+
+echo "pre-commit: formatting staged C# files..."
+STAGED_CS=$(git diff --cached --name-only --diff-filter=ACM | grep '\.cs$' || true)
+if [ -n "$STAGED_CS" ]; then
+    dotnet format --verify-no-changes --include $STAGED_CS || {
+        echo "Format check failed — run: dotnet format"
+        exit 1
+    }
+fi
+
+echo "pre-commit: checking secrets..."
+if git diff --cached | grep -qiE 'BEGIN (RSA|OPENSSH|PGP) PRIVATE KEY|api[_-]?key.{0,5}=.{0,30}[A-Za-z0-9_-]{20,}'; then
+    echo "Possible secret in staged changes — commit blocked."
+    exit 1
+fi
+
+echo "pre-commit: OK"

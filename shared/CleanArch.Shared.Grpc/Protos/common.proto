@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package cleanarch.common;
+option csharp_namespace = "CleanArch.Shared.Grpc.Common";
+
+import "google/protobuf/timestamp.proto";
+
+// Standard error detail
+message ErrorDetail {
+  string code        = 1;
+  string description = 2;
+  string field       = 3;  // for validation errors
+}
+
+// Pagination request
+message PageRequest {
+  int32  page      = 1;
+  int32  page_size = 2;
+  string sort_by   = 3;
+  bool   ascending = 4;
+}
+
+// Pagination response metadata
+message PageInfo {
+  int32 total_count  = 1;
+  int32 page         = 2;
+  int32 page_size    = 3;
+  int32 total_pages  = 4;
+  bool  has_next     = 5;
+  bool  has_previous = 6;
+}

@@ -1,0 +1,10 @@
+- name: clean architecture
+  href: clean-architecture.md
+- name: multi cloud
+  href: multi-cloud.md
+- name: microservices
+  href: microservices.md
+- name: domain layer
+  href: domain-layer.md
+- name: adding a provider
+  href: adding-a-provider.md

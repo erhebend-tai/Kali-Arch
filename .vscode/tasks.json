@@ -1,0 +1,52 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/CleanArch.slnx",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": { "kind": "build", "isDefault": true }
+    },
+    {
+      "label": "test",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "test",
+        "${workspaceFolder}/CleanArch.slnx",
+        "--no-build"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": { "kind": "test", "isDefault": true }
+    },
+    {
+      "label": "watch-api",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "watch",
+        "run",
+        "--project",
+        "${workspaceFolder}/src/CleanArch.API"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "go-vet",
+      "command": "bash",
+      "type": "process",
+      "args": [
+        "-c",
+        "for d in cf-microservices/*/; do (cd $d && go vet ./...); done"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}

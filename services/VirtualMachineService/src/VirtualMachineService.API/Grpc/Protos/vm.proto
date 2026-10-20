@@ -1,0 +1,151 @@
+syntax = "proto3";
+
+package cleanarch.vm;
+option csharp_namespace = "VirtualMachineService.API.Grpc";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "Protos/common.proto";
+
+// ── Service Definition ────────────────────────────────────────
+service VmService {
+
+  // Unary RPCs
+  rpc ProvisionVm    (ProvisionVmRequest)  returns (ProvisionVmResponse);
+  rpc GetVm          (GetVmRequest)        returns (VmDetails);
+  rpc ListVms        (ListVmsRequest)      returns (ListVmsResponse);
+  rpc StartVm        (VmActionRequest)     returns (VmActionResponse);
+  rpc StopVm         (VmActionRequest)     returns (VmActionResponse);
+  rpc DeallocateVm   (VmActionRequest)     returns (VmActionResponse);
+  rpc DeleteVm       (VmActionRequest)     returns (google.protobuf.Empty);
+  rpc ResizeVm       (ResizeVmRequest)     returns (VmActionResponse);
+
+  // Server streaming — real-time status updates
+  rpc StreamVmStatus (GetVmRequest)        returns (stream VmStatusUpdate);
+
+  // Server streaming — live metrics
+  rpc StreamVmMetrics(StreamMetricsRequest)returns (stream VmMetricsUpdate);
+
+  // Client streaming — bulk provision
+  rpc BulkProvision  (stream ProvisionVmRequest)
+                                           returns (BulkProvisionResponse);
+
+  // Bidirectional streaming — interactive console
+  rpc VmConsole      (stream ConsoleInput) returns (stream ConsoleOutput);
+}
+
+// ── Request / Response Messages ───────────────────────────────
+message ProvisionVmRequest {
+  string name           = 1;
+  string region         = 2;
+  string size           = 3;
+  string os_type        = 4;
+  string resource_group = 5;
+  string requested_by   = 6;
+  string tenant_id      = 7;
+  map<string, string> tags = 8;
+}
+
+message ProvisionVmResponse {
+  string vm_id  = 1;
+  string name   = 2;
+  string status = 3;
+}
+
+message GetVmRequest {
+  string vm_id     = 1;
+  string tenant_id = 2;
+}
+
+message ListVmsRequest {
+  string tenant_id = 1;
+  string status    = 2;  // optional filter
+  string region    = 3;  // optional filter
+  string search    = 4;  // optional search
+  cleanarch.common.PageRequest page = 5;
+}
+
+message ListVmsResponse {
+  repeated VmSummary vms  = 1;
+  cleanarch.common.PageInfo page_info = 2;
+}
+
+message VmActionRequest {
+  string vm_id     = 1;
+  string tenant_id = 2;
+}
+
+message VmActionResponse {
+  bool   success = 1;
+  string message = 2;
+  string vm_id   = 3;
+  string status  = 4;
+}
+
+message ResizeVmRequest {
+  string vm_id     = 1;
+  string new_size  = 2;
+  string tenant_id = 3;
+}
+
+message StreamMetricsRequest {
+  string vm_id            = 1;
+  string tenant_id        = 2;
+  int32  interval_seconds = 3;  // polling interval
+}
+
+message ConsoleInput  { string data = 1; }
+message ConsoleOutput { string data = 1; bool is_error = 2; }
+
+// ── Data Messages ─────────────────────────────────────────────
+message VmSummary {
+  string vm_id          = 1;
+  string name           = 2;
+  string region         = 3;
+  string size           = 4;
+  string os_type        = 5;
+  string status         = 6;
+  string resource_group = 7;
+  google.protobuf.Timestamp created_at = 8;
+}
+
+message VmDetails {
+  string vm_id          = 1;
+  string name           = 2;
+  string region         = 3;
+  string size           = 4;
+  string os_type        = 5;
+  string status         = 6;
+  string resource_group = 7;
+  string provider       = 8;
+  string created_by     = 9;
+  string tenant_id      = 10;
+  google.protobuf.Timestamp created_at = 11;
+  google.protobuf.Timestamp updated_at = 12;
+  map<string, string> tags = 13;
+}
+
+message VmStatusUpdate {
+  string vm_id      = 1;
+  string old_status = 2;
+  string new_status = 3;
+  google.protobuf.Timestamp changed_at = 4;
+}
+
+message VmMetricsUpdate {
+  string vm_id       = 1;
+  double cpu_percent = 2;
+  double memory_mb   = 3;
+  double disk_read_mbps  = 4;
+  double disk_write_mbps = 5;
+  double net_in_mbps     = 6;
+  double net_out_mbps    = 7;
+  google.protobuf.Timestamp sampled_at = 8;
+}
+
+message BulkProvisionResponse {
+  int32  total     = 1;
+  int32  succeeded = 2;
+  int32  failed    = 3;
+  repeated ProvisionVmResponse results = 4;
+}

@@ -1,0 +1,9 @@
+---
+- name: Deploy monitoring stack (Prometheus + Grafana)
+  hosts: baremetal
+  become: true
+  tasks:
+    - name: Start monitoring via compose
+      community.docker.docker_compose_v2:
+        project_src: "{{ platform_dir }}/monitoring"
+        state: present

@@ -1,0 +1,109 @@
+asyncapi: '3.0.0'
+info:
+  title: CleanArch Platform — Event Contracts
+  version: '1.0.0'
+  description: >
+    AsyncAPI contract for integration events published via the
+    outbox pattern. Event versions are declared with
+    [EventVersion] attributes in
+    shared/CleanArch.Shared.Contracts/Events.
+
+servers:
+  production:
+    host: messagebus.yourplatform.dev
+    protocol: kafka
+  dapr:
+    host: localhost:3500
+    protocol: http
+    description: Dapr sidecar — local development
+
+channels:
+  vm-events:
+    address: vm.events
+    messages:
+      vmProvisionedV1:
+        $ref: '#/components/messages/VmProvisionedV1'
+      vmProvisionedV2:
+        $ref: '#/components/messages/VmProvisionedV2'
+      vmStarted:
+        $ref: '#/components/messages/VmStarted'
+
+operations:
+  publishVmEvents:
+    action: send
+    channel:
+      $ref: '#/channels/vm-events'
+  consumeVmEvents:
+    action: receive
+    channel:
+      $ref: '#/channels/vm-events'
+
+components:
+  messages:
+    VmProvisionedV1:
+      name: vm-provisioned
+      title: VM Provisioned (v1)
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/VmProvisionedV1'
+      examples:
+        - name: default
+          payload:
+            vmId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+            vmName: web-01
+            region: us-east
+            resourceGroup: prod-rg
+            occurredAt: '2025-01-01T00:00:00Z'
+
+    VmProvisionedV2:
+      name: vm-provisioned
+      title: VM Provisioned (v2 — adds Size, OsType, ProvisionedBy)
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/VmProvisionedV2'
+
+    VmStarted:
+      name: vm-started
+      title: VM Started
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/VmStarted'
+
+  schemas:
+    VmProvisionedV1:
+      type: object
+      required: [vmId, vmName, region, resourceGroup, occurredAt]
+      properties:
+        vmId:          { type: string, format: uuid }
+        vmName:        { type: string }
+        region:        { type: string }
+        resourceGroup: { type: string }
+        occurredAt:    { type: string, format: date-time }
+
+    VmProvisionedV2:
+      type: object
+      required:
+        - vmId
+        - vmName
+        - region
+        - resourceGroup
+        - size
+        - osType
+        - provisionedBy
+        - occurredAt
+      properties:
+        vmId:          { type: string, format: uuid }
+        vmName:        { type: string }
+        region:        { type: string }
+        resourceGroup: { type: string }
+        size:          { type: string, enum: [small, medium, large, xlarge, xxlarge] }
+        osType:        { type: string, enum: [Linux, Windows] }
+        provisionedBy: { type: string }
+        occurredAt:    { type: string, format: date-time }
+
+    VmStarted:
+      type: object
+      required: [vmId, occurredAt]
+      properties:
+        vmId:       { type: string, format: uuid }
+        occurredAt: { type: string, format: date-time }

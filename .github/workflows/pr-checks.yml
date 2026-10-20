@@ -1,0 +1,29 @@
+name: PR Checks
+on:
+  pull_request: { types: [opened, synchronize, reopened] }
+jobs:
+  lint:              # dotnet format vs tools/linters/.editorconfig
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-dotnet
+      - run: dotnet format CleanArch.slnx --verify-no-changes
+
+  analyze:           # TOOLS LAYER — analyzers + generators run inside the build;
+                     # TreatWarningsAsErrors fails CI on any YP#### violation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-dotnet
+      - uses: ./.github/actions/run-analyzers
+
+  size-check:        # label PR XS/S/M/L/XL
+    runs-on: ubuntu-latest
+    steps:
+      - uses: CodelyTV/pr-size-labeler@v1
+        with: { GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} }
+
+  label:             # auto-label by touched paths
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/labeler@v5

@@ -1,0 +1,59 @@
+# Prometheus alert rules — load into the rule engine for the cluster.
+groups:
+  - name: platform.availability
+    interval: 30s
+    rules:
+      - alert: ApiDown
+        expr: up{job="cleanarch-api"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "API instance {{ $labels.instance }} is down"
+
+      - alert: HighErrorRate
+        expr: |
+          rate(platform_errors_total[5m])
+            / rate(platform_requests_total[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Error rate above 5% for 5 minutes"
+
+      - alert: HighLatencyP99
+        expr: |
+          histogram_quantile(0.99,
+            rate(platform_request_duration_ms_bucket[5m])) > 1000
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "P99 latency above 1s"
+
+  - name: platform.resources
+    interval: 30s
+    rules:
+      - alert: MemoryPressure
+        expr: memory_working_set_bytes > 1.5e9
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Working set above 1.5GB — MemoryPressureMonitor will GC"
+
+      - alert: OutboxBacklog
+        expr: outbox_unprocessed_messages > 1000
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Outbox backlog growing — check the dispatcher"
+
+      - alert: VmProvisioningFailures
+        expr: rate(vm_provision_failed_total[15m]) > 0
+        for: 15m
+        labels:
+          severity: warning
+        annotations:
+          summary: "VM provisioning is failing repeatedly"

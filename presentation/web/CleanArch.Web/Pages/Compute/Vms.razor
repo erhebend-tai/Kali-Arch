@@ -1,0 +1,72 @@
+@page "/compute"
+@inject IApiClient Api
+@rendermode InteractiveServer
+
+<PageTitle>Compute — CleanArch</PageTitle>
+
+<h1>Virtual Machines</h1>
+
+<button class="btn" @onclick="ProvisionAsync" disabled="@_busy">
+    @(_busy ? "Provisioning…" : "Provision test VM")
+</button>
+
+@if (_vms is null)
+{
+    <p>Loading…</p>
+}
+else if (_vms.Count == 0)
+{
+    <p>No VMs yet.</p>
+}
+else
+{
+    <table class="vm-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Region</th>
+                <th>Size</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var vm in _vms)
+            {
+                <tr>
+                    <td>@vm.Name</td>
+                    <td>@vm.Region</td>
+                    <td>@vm.Size</td>
+                    <td>
+                        <span class="status status-@vm.Status?.ToLower()">
+                            @vm.Status
+                        </span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<VmSummary>? _vms;
+    private bool _busy;
+
+    protected override async Task OnInitializedAsync() =>
+        _vms = await Api.ListVmsAsync();
+
+    private async Task ProvisionAsync()
+    {
+        _busy = true;
+        try
+        {
+            await Api.ProvisionVmAsync(new ProvisionVmRequest(
+                $"web-{Guid.NewGuid():N}"[..12],
+                "web-rg", "us-east", "Linux", "small"));
+            _vms = await Api.ListVmsAsync();
+        }
+        finally
+        {
+            _busy = false;
+        }
+    }
+}

@@ -1,0 +1,152 @@
+<Solution>
+  <Folder Name="/services/" />
+  <Folder Name="/services/AIService/" />
+  <Folder Name="/services/AIService/src/">
+    <Project Path="services/AIService/src/AIService.API/AIService.API.csproj" />
+    <Project Path="services/AIService/src/AIService.Application/AIService.Application.csproj" />
+    <Project Path="services/AIService/src/AIService.Domain/AIService.Domain.csproj" />
+    <Project Path="services/AIService/src/AIService.Functions/AIService.Functions.csproj" />
+    <Project Path="services/AIService/src/AIService.Infrastructure/AIService.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/services/AIService/tests/">
+    <Project Path="services/AIService/tests/AIService.Application.Tests/AIService.Application.Tests.csproj" />
+    <Project Path="services/AIService/tests/AIService.Domain.Tests/AIService.Domain.Tests.csproj" />
+    <Project Path="services/AIService/tests/AIService.Infrastructure.Tests/AIService.Infrastructure.Tests.csproj" />
+  </Folder>
+  <Folder Name="/services/GatewayService/" />
+  <Folder Name="/services/GatewayService/src/">
+    <Project Path="services/GatewayService/src/GatewayService.API/GatewayService.API.csproj" />
+  </Folder>
+  <Folder Name="/services/IdentityService/" />
+  <Folder Name="/services/IdentityService/src/">
+    <Project Path="services/IdentityService/src/IdentityService.API/IdentityService.API.csproj" />
+    <Project Path="services/IdentityService/src/IdentityService.Application/IdentityService.Application.csproj" />
+    <Project Path="services/IdentityService/src/IdentityService.Domain/IdentityService.Domain.csproj" />
+    <Project Path="services/IdentityService/src/IdentityService.Functions/IdentityService.Functions.csproj" />
+    <Project Path="services/IdentityService/src/IdentityService.Infrastructure/IdentityService.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/services/IdentityService/tests/">
+    <Project Path="services/IdentityService/tests/IdentityService.Application.Tests/IdentityService.Application.Tests.csproj" />
+    <Project Path="services/IdentityService/tests/IdentityService.Domain.Tests/IdentityService.Domain.Tests.csproj" />
+    <Project Path="services/IdentityService/tests/IdentityService.Infrastructure.Tests/IdentityService.Infrastructure.Tests.csproj" />
+  </Folder>
+  <Folder Name="/services/StorageService/" />
+  <Folder Name="/services/StorageService/src/">
+    <Project Path="services/StorageService/src/StorageService.API/StorageService.API.csproj" />
+    <Project Path="services/StorageService/src/StorageService.Application/StorageService.Application.csproj" />
+    <Project Path="services/StorageService/src/StorageService.Domain/StorageService.Domain.csproj" />
+    <Project Path="services/StorageService/src/StorageService.Functions/StorageService.Functions.csproj" />
+    <Project Path="services/StorageService/src/StorageService.Infrastructure/StorageService.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/services/StorageService/tests/">
+    <Project Path="services/StorageService/tests/StorageService.Application.Tests/StorageService.Application.Tests.csproj" />
+    <Project Path="services/StorageService/tests/StorageService.Domain.Tests/StorageService.Domain.Tests.csproj" />
+    <Project Path="services/StorageService/tests/StorageService.Infrastructure.Tests/StorageService.Infrastructure.Tests.csproj" />
+  </Folder>
+  <Folder Name="/services/VirtualMachineService/" />
+  <Folder Name="/services/VirtualMachineService/src/">
+    <Project Path="services/VirtualMachineService/src/VirtualMachineService.API/VirtualMachineService.API.csproj" />
+    <Project Path="services/VirtualMachineService/src/VirtualMachineService.Application/VirtualMachineService.Application.csproj" />
+    <Project Path="services/VirtualMachineService/src/VirtualMachineService.Domain/VirtualMachineService.Domain.csproj" />
+    <Project Path="services/VirtualMachineService/src/VirtualMachineService.Functions/VirtualMachineService.Functions.csproj" />
+    <Project Path="services/VirtualMachineService/src/VirtualMachineService.Infrastructure/VirtualMachineService.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/services/VirtualMachineService/tests/">
+    <Project Path="services/VirtualMachineService/tests/VirtualMachineService.Application.Tests/VirtualMachineService.Application.Tests.csproj" />
+    <Project Path="services/VirtualMachineService/tests/VirtualMachineService.Domain.Tests/VirtualMachineService.Domain.Tests.csproj" />
+    <Project Path="services/VirtualMachineService/tests/VirtualMachineService.Infrastructure.Tests/VirtualMachineService.Infrastructure.Tests.csproj" />
+  </Folder>
+  <Folder Name="/shared/">
+    <Project Path="shared/CleanArch.Shared.Contracts/CleanArch.Shared.Contracts.csproj" />
+    <Project Path="shared/CleanArch.Shared.Domain/CleanArch.Shared.Domain.csproj" />
+    <Project Path="shared/CleanArch.Shared.Extensions/CleanArch.Shared.Extensions.csproj" />
+    <Project Path="shared/CleanArch.Shared.Grpc/CleanArch.Shared.Grpc.csproj" />
+    <Project Path="shared/CleanArch.Shared.Infrastructure/CleanArch.Shared.Infrastructure.csproj" />
+    <Project Path="shared/CleanArch.Shared.RegularExpressions/CleanArch.Shared.RegularExpressions.csproj" />
+    <Project Path="shared/CleanArch.Shared.Results/CleanArch.Shared.Results.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/CleanArch.API/CleanArch.API.csproj" />
+    <Project Path="src/CleanArch.Application/CleanArch.Application.csproj" />
+    <Project Path="src/CleanArch.Domain/CleanArch.Domain.csproj" />
+    <Project Path="src/CleanArch.Functions/CleanArch.Functions.csproj" />
+    <Project Path="src/CleanArch.Infrastructure.Alibaba/CleanArch.Infrastructure.Alibaba.csproj" />
+    <Project Path="src/CleanArch.Infrastructure.AWS/CleanArch.Infrastructure.AWS.csproj" />
+    <Project Path="src/CleanArch.Infrastructure.Azure/CleanArch.Infrastructure.Azure.csproj" />
+    <Project Path="src/CleanArch.Infrastructure.BareMetal/CleanArch.Infrastructure.BareMetal.csproj" />
+    <Project Path="src/CleanArch.Infrastructure.Cloudflare/CleanArch.Infrastructure.Cloudflare.csproj" />
+    <Project Path="src/CleanArch.Infrastructure.Common/CleanArch.Infrastructure.Common.csproj" />
+    <Project Path="src/CleanArch.Infrastructure.GCP/CleanArch.Infrastructure.GCP.csproj" />
+    <Project Path="src/CleanArch.Infrastructure.Oracle/CleanArch.Infrastructure.Oracle.csproj" />
+  </Folder>
+  <Folder Name="/tools/" />
+  <Folder Name="/tools/analyzers/">
+    <Project Path="tools/analyzers/CleanArch.Analyzers/CleanArch.Analyzers.csproj" />
+    <Project Path="tools/analyzers/CleanArch.Analyzers.Tests/CleanArch.Analyzers.Tests.csproj" />
+  </Folder>
+  <Folder Name="/tools/codefixes/">
+    <Project Path="tools/codefixes/CleanArch.CodeFixes/CleanArch.CodeFixes.csproj" />
+  </Folder>
+  <Folder Name="/tools/generators/">
+    <Project Path="tools/generators/CleanArch.Generators/CleanArch.Generators.csproj" />
+  </Folder>
+  <Folder Name="/tools/linters/">
+    <Project Path="tools/linters/CleanArch.Linting/CleanArch.Linting.csproj" />
+  </Folder>
+  <Folder Name="/presentation/" />
+  <Folder Name="/presentation/web/">
+    <Project Path="presentation/web/CleanArch.Web/CleanArch.Web.csproj" />
+    <Project Path="presentation/web/CleanArch.Web.Tests/CleanArch.Web.Tests.csproj" />
+  </Folder>
+  <Folder Name="/presentation/mobile/">
+    <Project Path="presentation/mobile/CleanArch.Mobile/CleanArch.Mobile.csproj" />
+  </Folder>
+  <Folder Name="/presentation/desktop/">
+    <Project Path="presentation/desktop/CleanArch.Desktop/CleanArch.Desktop.csproj" />
+  </Folder>
+  <Folder Name="/mcp/" />
+  <Folder Name="/mcp/platform-mcp-server/">
+    <Project Path="mcp/platform-mcp-server/src/PlatformMcpServer/PlatformMcpServer.csproj" />
+  </Folder>
+  <Folder Name="/mcp/vm-mcp-server/">
+    <Project Path="mcp/vm-mcp-server/src/VmMcpServer/VmMcpServer.csproj" />
+  </Folder>
+  <Folder Name="/mcp/docs-mcp-server/">
+    <Project Path="mcp/docs-mcp-server/src/DocsMcpServer/DocsMcpServer.csproj" />
+  </Folder>
+  <Folder Name="/cli/">
+    <Project Path="cli/CleanArch.Cli/CleanArch.Cli.csproj" />
+    <Project Path="cli/CleanArch.DevCli/CleanArch.DevCli.csproj" />
+  </Folder>
+  <Folder Name="/logging/">
+    <Project Path="logging/CleanArch.Logging/CleanArch.Logging.csproj" />
+  </Folder>
+  <Folder Name="/logging/sinks/">
+    <Project Path="logging/sinks/CleanArch.Sinks.Cloudflare/CleanArch.Sinks.Cloudflare.csproj" />
+    <Project Path="logging/sinks/CleanArch.Sinks.Loki/CleanArch.Sinks.Loki.csproj" />
+    <Project Path="logging/sinks/CleanArch.Sinks.Oracle/CleanArch.Sinks.Oracle.csproj" />
+  </Folder>
+  <Folder Name="/watchers/">
+    <Project Path="watchers/CleanArch.FileWatcher/CleanArch.FileWatcher.csproj" />
+  </Folder>
+  <Folder Name="/workers/">
+    <Project Path="workers/CleanArch.Workers/CleanArch.Workers.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/CleanArch.Application.Tests/CleanArch.Application.Tests.csproj" />
+    <Project Path="tests/CleanArch.Domain.Tests/CleanArch.Domain.Tests.csproj" />
+    <Project Path="tests/CleanArch.Infrastructure.Alibaba.Tests/CleanArch.Infrastructure.Alibaba.Tests.csproj" />
+    <Project Path="tests/CleanArch.Infrastructure.AWS.Tests/CleanArch.Infrastructure.AWS.Tests.csproj" />
+    <Project Path="tests/CleanArch.Infrastructure.Azure.Tests/CleanArch.Infrastructure.Azure.Tests.csproj" />
+    <Project Path="tests/CleanArch.Infrastructure.BareMetal.Tests/CleanArch.Infrastructure.BareMetal.Tests.csproj" />
+    <Project Path="tests/CleanArch.Infrastructure.Cloudflare.Tests/CleanArch.Infrastructure.Cloudflare.Tests.csproj" />
+    <Project Path="tests/CleanArch.Infrastructure.GCP.Tests/CleanArch.Infrastructure.GCP.Tests.csproj" />
+    <Project Path="tests/CleanArch.Infrastructure.Oracle.Tests/CleanArch.Infrastructure.Oracle.Tests.csproj" />
+    <Project Path="tests/CleanArch.IntegrationTests/CleanArch.IntegrationTests.csproj" />
+    <Project Path="tests/CleanArch.ContractTests/CleanArch.ContractTests.csproj" />
+    <Project Path="tests/CleanArch.E2ETests/CleanArch.E2ETests.csproj" />
+  </Folder>
+  <Folder Name="/tests/performance/">
+    <Project Path="tests/performance/CleanArch.LoadTests/CleanArch.LoadTests.csproj" />
+  </Folder>
+</Solution>

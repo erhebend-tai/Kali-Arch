@@ -1,0 +1,6 @@
+name = "auth-worker"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# JWT issue/verify at the edge using Web Crypto.
+# AUTH_SECRET goes in via: wrangler secret put AUTH_SECRET

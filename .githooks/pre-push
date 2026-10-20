@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# .githooks/pre-push — build + fast tests before pushing.
+set -e
+
+echo "pre-push: building..."
+dotnet build CleanArch.slnx --nologo -v q || {
+    echo "Build failed — push blocked."
+    exit 1
+}
+
+echo "pre-push: unit tests..."
+dotnet test tests/CleanArch.Domain.Tests --no-build -v q
+dotnet test tests/CleanArch.Application.Tests --no-build -v q
+
+echo "pre-push: go vet..."
+for d in cf-microservices/*/; do
+    (cd "$d" && go vet ./...) || exit 1
+done
+
+echo "pre-push: OK"

@@ -1,0 +1,14 @@
+parameters:
+  - name: environment
+    type: string
+
+steps:
+  - script: |
+      echo "Deploying to ${{ parameters.environment }} via deploy/iac/"
+      echo "Provider: $(cloudProvider)"
+    displayName: IaC deploy — ${{ parameters.environment }}
+    env:
+      ARM_CLIENT_ID: $(azureClientId)
+      ARM_CLIENT_SECRET: $(azureClientSecret)
+      ARM_SUBSCRIPTION_ID: $(azureSubscriptionId)
+      ARM_TENANT_ID: $(azureTenantId)

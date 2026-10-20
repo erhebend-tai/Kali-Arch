@@ -1,0 +1,8 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: pubsub
+spec:
+  type: pubsub.azure.eventhubs   # swap: pubsub.kafka | pubsub.aws.snssqs | pubsub.gcp.pubsub
+  version: v1
+  metadata: []

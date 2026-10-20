@@ -1,0 +1,18 @@
+name: Build and Publish Docs
+on:
+  push:
+    branches: [main]
+    paths: ["docs/**", "src/**/*.cs"]
+jobs:
+  build-docs:        # docfx docs/docfx.json -> GitHub Pages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-dotnet
+      - run: |
+          dotnet tool install -g docfx
+          docfx docs/docfx.json
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/_site

@@ -1,0 +1,6 @@
+#cloud-config
+# ubuntu-22.04 first-boot provisioning — packages, users, ssh, cloudflared install.
+packages:
+  - curl
+  - git
+  - docker.io

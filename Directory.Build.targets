@@ -1,0 +1,28 @@
+<Project>
+
+  <!--
+    Warn on any PackageReference that still declares an inline
+    Version — with CPM enabled, NuGet errors anyway, but this
+    surfaces the same rule for non-NuGet tools.
+  -->
+  <Target Name="ValidateCentralPackageVersions"
+          BeforeTargets="ResolveNuGetPackageAssets"
+          Condition="'$(ManagePackageVersionsCentrally)' == 'true'">
+    <ItemGroup>
+      <_VersionedPackage
+          Include="@(PackageReference)"
+          Condition="'%(PackageReference.Version)' != ''" />
+    </ItemGroup>
+    <Warning
+        Condition="'@(_VersionedPackage)' != ''"
+        Text="PackageReference declares an inline Version —
+              move it to Directory.Packages.props:
+              @(_VersionedPackage->'%(Identity)')" />
+  </Target>
+
+  <!-- Generated files never ship into the repo root. -->
+  <Target Name="EnsureGeneratedArtifactsDirectory">
+    <MakeDir Directories="artifacts" />
+  </Target>
+
+</Project>

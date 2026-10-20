@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "ms-dotnettools.csharp",
+    "ms-dotnettools.csdevkit",
+    "golang.go",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-azuretools.vscode-docker",
+    "ms-vscode.vscode-yaml",
+    "hashicorp.terraform",
+    "ms-playwright.playwright",
+    "humao.rest-client",
+    "dart-code.dart-code",
+    "dart-code.flutter"
+  ]
+}

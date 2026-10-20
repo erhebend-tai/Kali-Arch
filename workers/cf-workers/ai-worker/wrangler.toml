@@ -1,0 +1,6 @@
+name = "ai-worker"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# [ai]
+# binding = "AI"    # Workers AI binding — e.g. @cf/meta/llama-3.1-8b-instruct

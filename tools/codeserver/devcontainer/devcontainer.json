@@ -1,0 +1,13 @@
+{
+  "name": "CleanArch Dev Environment",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "codeserver",
+  "workspaceFolder": "/workspace",
+  "features": {
+    "ghcr.io/devcontainers/features/dotnet:2": { "version": "9.0" },
+    "ghcr.io/devcontainers/features/go:1":     { "version": "1.23" },
+    "ghcr.io/devcontainers/features/node:1":   { "version": "20" }
+  },
+  "postCreateCommand": "bash devcontainer/post-create.sh",
+  "forwardPorts": [5000, 5001, 8080]
+}

@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+option csharp_namespace = "CleanArch.API.Grpc";
+
+package compute;
+
+// gRPC entry point — same application pipeline as HTTP.
+service ComputeService {
+  rpc ProvisionVm (ProvisionVmRequest) returns (ProvisionVmReply);
+  rpc GetVm (GetVmRequest) returns (GetVmReply);
+  rpc ListVms (ListVmsRequest) returns (ListVmsReply);
+  rpc StartVm (StartVmRequest) returns (StartVmReply);
+}
+
+message ProvisionVmRequest {
+  string name = 1;
+  string region = 2;
+  string size = 3;
+  string os_type = 4;
+  string resource_group = 5;
+}
+
+message ProvisionVmReply {
+  string id = 1;
+  string name = 2;
+  string status = 3;
+}
+
+message GetVmRequest {
+  string id = 1;
+}
+
+message GetVmReply {
+  string id = 1;
+  string name = 2;
+  string region = 3;
+  string size = 4;
+  string os_type = 5;
+  string status = 6;
+  string resource_group = 7;
+}
+
+message ListVmsRequest {
+  string region = 1;
+  bool running_only = 2;
+}
+
+message ListVmsReply {
+  repeated VmSummary vms = 1;
+}
+
+message VmSummary {
+  string id = 1;
+  string name = 2;
+  string region = 3;
+  string size = 4;
+  string status = 5;
+}
+
+message StartVmRequest {
+  string id = 1;
+}
+
+message StartVmReply {
+  bool success = 1;
+}
